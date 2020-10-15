@@ -1,0 +1,1603 @@
+{
+  "DataGroups": {
+    "GPS": 1,
+    "Navigation": 2,
+    "Vessel": 3,
+    "Sonar": 4,
+    "Weather": 5,
+    "Trip": 6,
+    "Time": 7,
+    "Engine": 8,
+    "Transmission": 9,
+    "Fuel Tank": 10,
+    "Fresh Water Tank": 11,
+    "Gray Water Tank": 12,
+    "Live Well Tank": 13,
+    "Oil Tank": 14,
+    "Black Water Tank": 15,
+    "Engine Room": 16,
+    "Cabin": 17,
+    "Bait Well": 18,
+    "Refrigerator": 19,
+    "Heating System": 20,
+    "Freezer": 21,
+    "Battery": 22,
+    "Rudder": 23,
+    "Trim Tab": 24,
+    "AC Input": 25,
+    "Digital Switching": 26,
+    "Other": 27,
+    "GPS Status": 28,
+    "Route Data": 29,
+    "Speed Depth": 30,
+    "Log Timer": 31,
+    "Environment": 32,
+    "Wind": 33,
+    "Pilot": 34,
+    "Sailing": 35,
+    "AC Output": 36,
+    "Charger": 37,
+    "Inverter": 38,
+    "H5000 CPU": 40
+  },
+  "SettingEventGroups": {
+    "Display": 1,
+    "Units": 2,
+    "Alarms": 3,
+    "Trip Log": 4,
+    "MOB": 5,
+    "Waypoint": 6
+  },
+  "EventItems": [
+    {
+      "Name": "Activate Alarm",
+      "ID": 1,
+      "Group": 1
+    },
+    {
+      "Name": "Deactivate Alarm",
+      "ID": 2,
+      "Group": 1
+    },
+    {
+      "Name": "Acknowledge Alarm",
+      "ID": 3,
+      "Group": 1
+    },
+    {
+      "Name": "Silence Alarm",
+      "ID": 4,
+      "Group": 1
+    },
+    {
+      "Name": "MOB",
+      "ID": 5,
+      "Group": 2
+    },
+    {
+      "Name": "Create Waypoint",
+      "ID": 6,
+      "Group": 3
+    },
+    {
+      "Name": "Reset Trip Log",
+      "ID": 7,
+      "Group": 4
+    },
+    {
+      "Name": "Zoom In",
+      "ID": 8,
+      "Group": 5
+    },
+    {
+      "Name": "Zoom Out",
+      "ID": 9,
+      "Group": 5
+    }
+  ],
+  "DataItems": [
+    {
+      "Name": "Altitude",
+      "ID": 1,
+      "Group": 1
+    },
+    {
+      "Name": "Position Error",
+      "ID": 3,
+      "Group": 1
+    },
+    {
+      "Name": "HDOP",
+      "ID": 4,
+      "Group": 28
+    },
+    {
+      "Name": "VDOP",
+      "ID": 5,
+      "Group": 28
+    },
+    {
+      "Name": "TDOP",
+      "ID": 6,
+      "Group": 28
+    },
+    {
+      "Name": "PDOP",
+      "ID": 7,
+      "Group": 28
+    },
+    {
+      "Name": "Geoidal Separation",
+      "ID": 8,
+      "Group": 28
+    },
+    {
+      "Name": "COG",
+      "ID": 9,
+      "Group": 1
+    },
+    {
+      "Name": "Position Quality",
+      "ID": 10,
+      "Group": 28
+    },
+    {
+      "Name": "Position Integrity",
+      "ID": 11,
+      "Group": 28
+    },
+    {
+      "Name": "Satellites in View",
+      "ID": 12,
+      "Group": 28
+    },
+    {
+      "Name": "WAAS Status",
+      "ID": 13,
+      "Group": 28
+    },
+    {
+      "Name": "Bearing (to Waypoint)",
+      "ID": 14,
+      "Group": 2
+    },
+    {
+      "Name": "Bearing Origin to Waypoint",
+      "ID": 15,
+      "Group": 2
+    },
+    {
+      "Name": "Course to Steer",
+      "ID": 17,
+      "Group": 2
+    },
+    {
+      "Name": "Cross Track Error",
+      "ID": 18,
+      "Group": 2
+    },
+    {
+      "Name": "VMG to Waypoint",
+      "ID": 19,
+      "Group": 2
+    },
+    {
+      "Name": "Destination",
+      "ID": 20,
+      "Group": 2
+    },
+    {
+      "Name": "Distance to Turn",
+      "ID": 21,
+      "Group": 2
+    },
+    {
+      "Name": "Distance to Destination",
+      "ID": 22,
+      "Group": 2
+    },
+    {
+      "Name": "Time to Turn",
+      "ID": 23,
+      "Group": 29
+    },
+    {
+      "Name": "Time to Destination",
+      "ID": 24,
+      "Group": 29
+    },
+    {
+      "Name": "ETA at Turn",
+      "ID": 25,
+      "Group": 29
+    },
+    {
+      "Name": "ETA at Destination",
+      "ID": 26,
+      "Group": 29
+    },
+    {
+      "Name": "Total Distance",
+      "ID": 27,
+      "Group": 29
+    },
+    {
+      "Name": "Steer Arrow",
+      "ID": 28,
+      "Group": 2
+    },
+    {
+      "Name": "Odometer",
+      "ID": 29,
+      "Group": 6
+    },
+    {
+      "Name": "Trip Distance",
+      "ID": 30,
+      "Group": 6
+    },
+    {
+      "Name": "Trip Time",
+      "ID": 31,
+      "Group": 6
+    },
+    {
+      "Name": "Local Date",
+      "ID": 32,
+      "Group": 7
+    },
+    {
+      "Name": "Local Time",
+      "ID": 33,
+      "Group": 7
+    },
+    {
+      "Name": "UTC Date",
+      "ID": 34,
+      "Group": 7
+    },
+    {
+      "Name": "UTC Time",
+      "ID": 35,
+      "Group": 7
+    },
+    {
+      "Name": "Local Time Offset",
+      "ID": 36,
+      "Group": 7
+    },
+    {
+      "Name": "Heading",
+      "ID": 37,
+      "Group": 3
+    },
+    {
+      "Name": "Voltage",
+      "ID": 38,
+      "Group": 27
+    },
+    {
+      "Name": "Current Set",
+      "ID": 39,
+      "Group": 27
+    },
+    {
+      "Name": "Current Drift",
+      "ID": 40,
+      "Group": 27
+    },
+    {
+      "Name": "SOG",
+      "ID": 41,
+      "Group": 1
+    },
+    {
+      "Name": "Water Speed",
+      "ID": 42,
+      "Group": 4
+    },
+    {
+      "Name": "Pitot Speed",
+      "ID": 43,
+      "Group": 3
+    },
+    {
+      "Name": "Average Trip Speed",
+      "ID": 44,
+      "Group": 6
+    },
+    {
+      "Name": "Maximum Trip Speed",
+      "ID": 45,
+      "Group": 6
+    },
+    {
+      "Name": "Apparent Wind Speed",
+      "ID": 46,
+      "Group": 5
+    },
+    {
+      "Name": "True Wind Speed",
+      "ID": 47,
+      "Group": 5
+    },
+    {
+      "Name": "Water Temperature",
+      "ID": 48,
+      "Group": 4
+    },
+    {
+      "Name": "Outside Temperature",
+      "ID": 49,
+      "Group": 5
+    },
+    {
+      "Name": "Inside Temperature",
+      "ID": 50,
+      "Group": 3
+    },
+    {
+      "Name": "Engine Room Temperature",
+      "ID": 51,
+      "Group": 16
+    },
+    {
+      "Name": "Main Cabin Temperature",
+      "ID": 52,
+      "Group": 17
+    },
+    {
+      "Name": "Live Well Temperature",
+      "ID": 53,
+      "Group": 13
+    },
+    {
+      "Name": "Bait Well Temperature",
+      "ID": 54,
+      "Group": 18
+    },
+    {
+      "Name": "Refrigeration Temperature",
+      "ID": 55,
+      "Group": 19
+    },
+    {
+      "Name": "Heating System Temperature",
+      "ID": 56,
+      "Group": 20
+    },
+    {
+      "Name": "Dew Point Temperature",
+      "ID": 57,
+      "Group": 5
+    },
+    {
+      "Name": "Apparent Wind Chill Temperature",
+      "ID": 58,
+      "Group": 5
+    },
+    {
+      "Name": "Theoretic Wind Chill Temperature",
+      "ID": 59,
+      "Group": 5
+    },
+    {
+      "Name": "Heat Index Temperature",
+      "ID": 60,
+      "Group": 5
+    },
+    {
+      "Name": "Freezer Temperature",
+      "ID": 61,
+      "Group": 21
+    },
+    {
+      "Name": "Engine Temperature",
+      "ID": 62,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Air Temperature",
+      "ID": 63,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Oil Temperature Temperature",
+      "ID": 64,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Battery Temperature",
+      "ID": 65,
+      "Group": 8
+    },
+    {
+      "Name": "Atmospheric Pressure",
+      "ID": 66,
+      "Group": 5
+    },
+    {
+      "Name": "Engine Boost Pressure",
+      "ID": 67,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Oil Pressure",
+      "ID": 68,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Water Pressure",
+      "ID": 69,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Fuel Pressure",
+      "ID": 70,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Manifold Pressure",
+      "ID": 71,
+      "Group": 8
+    },
+    {
+      "Name": "Stream Pressure",
+      "ID": 72,
+      "Group": 27
+    },
+    {
+      "Name": "Compressed Air Pressure",
+      "ID": 73,
+      "Group": 27
+    },
+    {
+      "Name": "Other Hydraulic Pressure",
+      "ID": 74,
+      "Group": 27
+    },
+    {
+      "Name": "Depth",
+      "ID": 77,
+      "Group": 4
+    },
+    {
+      "Name": "Water Distance",
+      "ID": 78,
+      "Group": 4
+    },
+    {
+      "Name": "Engine RPM",
+      "ID": 79,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Trim",
+      "ID": 80,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Alternator Potential",
+      "ID": 81,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Fuel Rate",
+      "ID": 82,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Percent Load",
+      "ID": 83,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Percent Torque",
+      "ID": 84,
+      "Group": 8
+    },
+    {
+      "Name": "Suzuki Alarm Level Low",
+      "ID": 85,
+      "Group": 8
+    },
+    {
+      "Name": "Suzuki Alarm Level High",
+      "ID": 86,
+      "Group": 8
+    },
+    {
+      "Name": "Fuel Tank Level",
+      "ID": 87,
+      "Group": 10
+    },
+    {
+      "Name": "Fresh Water Fluid Level",
+      "ID": 88,
+      "Group": 11
+    },
+    {
+      "Name": "Gray Water Fluid Level",
+      "ID": 89,
+      "Group": 12
+    },
+    {
+      "Name": "Live Well Fluid Level",
+      "ID": 90,
+      "Group": 13
+    },
+    {
+      "Name": "Oil Fluid Level",
+      "ID": 91,
+      "Group": 14
+    },
+    {
+      "Name": "Black Water Fluid Level",
+      "ID": 92,
+      "Group": 15
+    },
+    {
+      "Name": "Fuel Remaining",
+      "ID": 93,
+      "Group": 10
+    },
+    {
+      "Name": "Fresh Water Fluid Volume",
+      "ID": 94,
+      "Group": 11
+    },
+    {
+      "Name": "Gray Water Fluid Volume",
+      "ID": 95,
+      "Group": 12
+    },
+
+    {
+      "Name": "Live Well Fluid Volume",
+      "ID": 96,
+      "Group": 13
+    },
+    {
+      "Name": "Oil Fluid Volume",
+      "ID": 97,
+      "Group": 14
+    },
+    {
+      "Name": "Black Water Fluid Volume",
+      "ID": 98,
+      "Group": 15
+    },
+    {
+      "Name": "Generic Fluid Volume",
+      "ID": 99,
+      "Group": 0
+    },
+    {
+      "Name": "Generic Tank Capacity",
+      "ID": 105,
+      "Group": 0
+    },
+    {
+      "Name": "Fuel Tank Capacity",
+      "ID": 106,
+      "Group": 10
+    },
+    {
+      "Name": "Fresh Water Tank Capacity",
+      "ID": 107,
+      "Group": 11
+    },
+    {
+      "Name": "Gray Water Tank Capacity",
+      "ID": 108,
+      "Group": 12
+    },
+    {
+      "Name": "GrayLive Well Tank Capacity",
+      "ID": 109,
+      "Group": 13
+    },
+    {
+      "Name": "Oil Tank Capacity",
+      "ID": 110,
+      "Group": 14
+    },
+    {
+      "Name": "Black Water Tank Capacity",
+      "ID": 111,
+      "Group": 15
+    },
+    {
+      "Name": "Tank Fuel Used",
+      "ID": 112,
+      "Group": 10
+    },
+    {
+      "Name": "Engine Fuel Used",
+      "ID": 113,
+      "Group": 8
+    },
+    {
+      "Name": "Trip Fuel Used",
+      "ID": 114,
+      "Group": 8
+    },
+    {
+      "Name": "Seasonal Fuel Used",
+      "ID": 115,
+      "Group": 8
+    },
+    {
+      "Name": "K Value",
+      "ID": 116,
+      "Group": 8
+    },
+    {
+      "Name": "Battery Potential",
+      "ID": 117,
+      "Group": 22
+    },
+    {
+      "Name": "Battery Current",
+      "ID": 118,
+      "Group": 22
+    },
+    {
+      "Name": "Trim Tab",
+      "ID": 119,
+      "Group": 24
+    },
+    {
+      "Name": "Rate of Turn",
+      "ID": 121,
+      "Group": 3
+    },
+    {
+      "Name": "Yaw",
+      "ID": 122,
+      "Group": 3
+    },
+    {
+      "Name": "Pitch",
+      "ID": 123,
+      "Group": 3
+    },
+    {
+      "Name": "Roll",
+      "ID": 124,
+      "Group": 3
+    },
+    {
+      "Name": "Magnetic Variation",
+      "ID": 125,
+      "Group": 27
+    },
+    {
+      "Name": "Deviation",
+      "ID": 126,
+      "Group": 27
+    },
+    {
+      "Name": "Water Fuel Economy",
+      "ID": 127,
+      "Group": 8
+    },
+    {
+      "Name": "GPS Fuel Economy",
+      "ID": 128,
+      "Group": 8
+    },
+    {
+      "Name": "Water Fuel Range",
+      "ID": 130,
+      "Group": 8
+    },
+    {
+      "Name": "GPS Fuel Range",
+      "ID": 131,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Hours Used",
+      "ID": 132,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Type",
+      "ID": 133,
+      "Group": 8
+    },
+    {
+      "Name": "Vessel Fuel Rate",
+      "ID": 134,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel Water Fuel Economy",
+      "ID": 135,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel GPS Fuel Economy",
+      "ID": 136,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel Fuel Remaining",
+      "ID": 137,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel Water Fuel Range",
+      "ID": 138,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel GPS Fuel Range",
+      "ID": 139,
+      "Group": 3
+    },
+    {
+      "Name": "Apparent Wind Angle",
+      "ID": 140,
+      "Group": 5
+    },
+    {
+      "Name": "True Wind Angle",
+      "ID": 141,
+      "Group": 5
+    },
+    {
+      "Name": "True Wind Direction",
+      "ID": 142,
+      "Group": 5
+    },
+    {
+      "Name": "Inside Humidity",
+      "ID": 143,
+      "Group": 3
+    },
+    {
+      "Name": "Outside Humidity",
+      "ID": 144,
+      "Group": 5
+    },
+    {
+      "Name": "Set Humidity",
+      "ID": 145,
+      "Group": 3
+    },
+    {
+      "Name": "Rudder Angle",
+      "ID": 146,
+      "Group": 23
+    },
+    {
+      "Name": "Transmission Gear",
+      "ID": 147,
+      "Group": 9
+    },
+    {
+      "Name": "Transmission Oil Pressure",
+      "ID": 148,
+      "Group": 9
+    },
+    {
+      "Name": "Transmission Oil Temperature",
+      "ID": 149,
+      "Group": 9
+    },
+    {
+      "Name": "Commanded Rudder Angle",
+      "ID": 150,
+      "Group": 23
+    },
+    {
+      "Name": "Rudder Limit",
+      "ID": 151,
+      "Group": 23
+    },
+    {
+      "Name": "Off Heading Limit",
+      "ID": 152,
+      "Group": 3
+    },
+    {
+      "Name": "Radius of Turn Order",
+      "ID": 153,
+      "Group": 3
+    },
+    {
+      "Name": "Rate of Turn Order",
+      "ID": 154,
+      "Group": 3
+    },
+    {
+      "Name": "Off Track Limit",
+      "ID": 155,
+      "Group": 3
+    },
+    {
+      "Name": "Logging Time Remaining",
+      "ID": 156,
+      "Group": 27
+    },
+    {
+      "Name": "Position Fix Type",
+      "ID": 157,
+      "Group": 28
+    },
+    {
+      "Name": "Engine Discrete Status",
+      "ID": 158,
+      "Group": 8
+    },
+    {
+      "Name": "Transmission Discrete Status",
+      "ID": 159,
+      "Group": 9
+    },
+    {
+      "Name": "GPS Best of Four Signal to Noise Ratio",
+      "ID": 160,
+      "Group": 28
+    },
+    {
+      "Name": "Generic Fluid Level",
+      "ID": 161,
+      "Group": 0
+    },
+    {
+      "Name": "Generic Pressure",
+      "ID": 162,
+      "Group": 0
+    },
+    {
+      "Name": "Generic Temperature",
+      "ID": 163,
+      "Group": 0
+    },
+    {
+      "Name": "Internal Voltage",
+      "ID": 164,
+      "Group": 27
+    },
+    {
+      "Name": "Structure Depth",
+      "ID": 166,
+      "Group": 4
+    },
+    {
+      "Name": "Loran Position",
+      "ID": 167,
+      "Group": 3
+    },
+    {
+      "Name": "Vessel Status",
+      "ID": 168,
+      "Group": 3
+    },
+    {
+      "Name": "Battery DC Type",
+      "ID": 169,
+      "Group": 22
+    },
+    {
+      "Name": "Battery State of Charge",
+      "ID": 170,
+      "Group": 22
+    },
+    {
+      "Name": "Battery State of Health",
+      "ID": 171,
+      "Group": 22
+    },
+    {
+      "Name": "Battery Time Remaining",
+      "ID": 172,
+      "Group": 22
+    },
+    {
+      "Name": "Battery Ripple Voltage",
+      "ID": 173,
+      "Group": 22
+    },
+    {
+      "Name": "AC Input 1 Quality",
+      "ID": 174,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Quality",
+      "ID": 175,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Quality",
+      "ID": 176,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Voltage",
+      "ID": 177,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Voltage",
+      "ID": 178,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Voltage",
+      "ID": 179,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Current",
+      "ID": 180,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Current",
+      "ID": 181,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Current",
+      "ID": 182,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Frequency",
+      "ID": 183,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Frequency",
+      "ID": 184,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Frequency",
+      "ID": 185,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Breaker Size",
+      "ID": 186,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Breaker Size",
+      "ID": 187,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Breaker Size",
+      "ID": 188,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Real Power",
+      "ID": 189,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Real Power",
+      "ID": 190,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Real Power",
+      "ID": 191,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Reactive Power",
+      "ID": 192,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Reactive Power",
+      "ID": 193,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Reactive Power",
+      "ID": 194,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 1 Power Factor",
+      "ID": 195,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 2 Power Factor",
+      "ID": 196,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Power Factor",
+      "ID": 197,
+      "Group": 25
+    },
+    {
+      "Name": "Switch State",
+      "ID": 198,
+      "Group": 26
+    },
+    {
+      "Name": "Switch Current",
+      "ID": 199,
+      "Group": 26
+    },
+    {
+      "Name": "Switch Fault",
+      "ID": 200,
+      "Group": 26
+    },
+    {
+      "Name": "Switch Dim Level",
+      "ID": 201,
+      "Group": 26
+    },
+    {
+      "Name": "Previous Commanded Heading",
+      "ID": 202,
+      "Group": 34
+    },
+    {
+      "Name": "Commanded Wind Angle",
+      "ID": 203,
+      "Group": 34
+    },
+    {
+      "Name": "Commanded Bearing Offset",
+      "ID": 204,
+      "Group": 34
+    },
+    {
+      "Name": "Commanded Bearing",
+      "ID": 205,
+      "Group": 34
+    },
+    {
+      "Name": "Commanded Depth Contour",
+      "ID": 206,
+      "Group": 34
+    },
+    {
+      "Name": "Commanded Course Change",
+      "ID": 207,
+      "Group": 34
+    },
+    {
+      "Name": "Pilot Drift",
+      "ID": 208,
+      "Group": 34
+    },
+    {
+      "Name": "Pilot Distance to Turn",
+      "ID": 209,
+      "Group": 34
+    },
+    {
+      "Name": "Pilot Time to Turn",
+      "ID": 210,
+      "Group": 34
+    },
+    {
+      "Name": "Pilot Reference Position",
+      "ID": 211,
+      "Group": 34
+    },
+    {
+      "Name": "DC Status",
+      "ID": 212,
+      "Group": 22
+    },
+    {
+      "Name": "AC Input 1 Status",
+      "ID": 213,
+      "Group": 25
+    },
+    {
+      "Name": "Switch Voltage",
+      "ID": 214,
+      "Group": 26
+    },
+    {
+      "Name": "Battery Capacity Remaining",
+      "ID": 215,
+      "Group": 22
+    },
+    {
+      "Name": "H3000 Linear 1",
+      "ID": 217,
+      "Group": 35
+    },
+    {
+      "Name": "H3000 Linear 2",
+      "ID": 218,
+      "Group": 35
+    },
+    {
+      "Name": "H3000 Linear 3",
+      "ID": 219,
+      "Group": 35
+    },
+    {
+      "Name": "Boom Position",
+      "ID": 220,
+      "Group": 35
+    },
+    {
+      "Name": "Sailing Course",
+      "ID": 221,
+      "Group": 35
+    },
+    {
+      "Name": "Daggerboard Position",
+      "ID": 222,
+      "Group": 35
+    },
+    {
+      "Name": "H3000 Linear 4",
+      "ID": 223,
+      "Group": 35
+    },
+    {
+      "Name": "Heading on Next Tack",
+      "ID": 224,
+      "Group": 35
+    },
+    {
+      "Name": "Keel Angle",
+      "ID": 225,
+      "Group": 35
+    },
+    {
+      "Name": "Leeway",
+      "ID": 226,
+      "Group": 35
+    },
+    {
+      "Name": "Mast Angle",
+      "ID": 227,
+      "Group": 35
+    },
+    {
+      "Name": "Target True Wind Angle",
+      "ID": 228,
+      "Group": 35
+    },
+    {
+      "Name": "Keel Trim Tab",
+      "ID": 229,
+      "Group": 35
+    },
+    {
+      "Name": "Race Timer",
+      "ID": 230,
+      "Group": 35
+    },
+    {
+      "Name": "Canard Angle",
+      "ID": 231,
+      "Group": 35
+    },
+    {
+      "Name": "Next Leg Apparent Wind Angle",
+      "ID": 232,
+      "Group": 35
+    },
+    {
+      "Name": "Next Leg Apparent Wind Speed",
+      "ID": 233,
+      "Group": 35
+    },
+    {
+      "Name": "Target Boat Speed",
+      "ID": 234,
+      "Group": 35
+    },
+    {
+      "Name": "VMG to Wind",
+      "ID": 235,
+      "Group": 35
+    },
+    {
+      "Name": "Time to Layline",
+      "ID": 236,
+      "Group": 35
+    },
+    {
+      "Name": "Distance to Layline",
+      "ID": 237,
+      "Group": 35
+    },
+    {
+      "Name": "Aft Depth",
+      "ID": 238,
+      "Group": 4
+    },
+    {
+      "Name": "Forestay",
+      "ID": 239,
+      "Group": 35
+    },
+    {
+      "Name": "Polar Speed",
+      "ID": 240,
+      "Group": 35
+    },
+    {
+      "Name": "Polar Performance",
+      "ID": 241,
+      "Group": 35
+    },
+    {
+      "Name": "Tacking Performance",
+      "ID": 242,
+      "Group": 35
+    },
+    {
+      "Name": "Wind Angle to Mast",
+      "ID": 243,
+      "Group": 35
+    },
+    {
+      "Name": "CAN Bus Voltage",
+      "ID": 244,
+      "Group": 27
+    },
+    {
+      "Name": "Internal Temperature",
+      "ID": 245,
+      "Group": 27
+    },
+    {
+      "Name": "Engage Current",
+      "ID": 246,
+      "Group": 27
+    },
+    {
+      "Name": "URef Voltage",
+      "ID": 247,
+      "Group": 27
+    },
+    {
+      "Name": "Supply Voltage",
+      "ID": 248,
+      "Group": 27
+    },
+    {
+      "Name": "Destination Position",
+      "ID": 249,
+      "Group": 2
+    },
+    {
+      "Name": "Engine Sync State",
+      "ID": 252,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Predictive General Maintenance",
+      "ID": 253,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Throttle",
+      "ID": 254,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Steering Angle",
+      "ID": 255,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Break In Required",
+      "ID": 256,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Break In Remaining",
+      "ID": 258,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Trim Status",
+      "ID": 259,
+      "Group": 8
+    },
+    {
+      "Name": "Engine Autopilot Present",
+      "ID": 260,
+      "Group": 34
+    },
+    {
+      "Name": "AC Output 1 Quality",
+      "ID": 261,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Quality",
+      "ID": 262,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Quality",
+      "ID": 263,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Voltage",
+      "ID": 264,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Voltage",
+      "ID": 265,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Voltage",
+      "ID": 266,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Current",
+      "ID": 267,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Current",
+      "ID": 268,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Current",
+      "ID": 269,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Frequency",
+      "ID": 270,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Frequency",
+      "ID": 271,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Frequency",
+      "ID": 272,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Breaker Size",
+      "ID": 273,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Breaker Size",
+      "ID": 274,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Breaker Size",
+      "ID": 275,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Real Power",
+      "ID": 276,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Real Power",
+      "ID": 277,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Real Power",
+      "ID": 278,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Reactive Power",
+      "ID": 279,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Reactive Power",
+      "ID": 280,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Reactive Power",
+      "ID": 281,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 1 Power Factor",
+      "ID": 282,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Power Factor",
+      "ID": 283,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Power Factor",
+      "ID": 284,
+      "Group": 36
+    },
+    {
+      "Name": "AC Input 2 Status",
+      "ID": 285,
+      "Group": 25
+    },
+    {
+      "Name": "AC Input 3 Status",
+      "ID": 286,
+      "Group": 25
+    },
+    {
+      "Name": "AC Output 1 Status",
+      "ID": 287,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 2 Status",
+      "ID": 288,
+      "Group": 36
+    },
+    {
+      "Name": "AC Output 3 Status",
+      "ID": 289,
+      "Group": 36
+    },
+    {
+      "Name": "Switch Manual Override",
+      "ID": 290,
+      "Group": 26
+    },
+    {
+      "Name": "Switch Reverse POlarity",
+      "ID": 291,
+      "Group": 26
+    },
+    {
+      "Name": "Switch AC Source Available",
+      "ID": 292,
+      "Group": 26
+    },
+    {
+      "Name": "Switch AC Contactor System On State",
+      "ID": 293,
+      "Group": 26
+    },
+    {
+      "Name": "Charger Battery Instance",
+      "ID": 294,
+      "Group": 37
+    },
+    {
+      "Name": "Charger Operating State",
+      "ID": 295,
+      "Group": 37
+    },
+    {
+      "Name": "Charger Mode",
+      "ID": 296,
+      "Group": 37
+    },
+    {
+      "Name": "Charger Enabled",
+      "ID": 297,
+      "Group": 37
+    },
+    {
+      "Name": "Charger Equalization Pending",
+      "ID": 298,
+      "Group": 37
+    },
+    {
+      "Name": "Charger Equalization Time Remaining",
+      "ID": 299,
+      "Group": 37
+    },
+    {
+      "Name": "Inverter AC Instance",
+      "ID": 300,
+      "Group": 38
+    },
+    {
+      "Name": "Inverter AC Instance",
+      "ID": 300,
+      "Group": 38
+    },
+    {
+      "Name": "Inverter DC Instance",
+      "ID": 301,
+      "Group": 38
+    },
+    {
+      "Name": "Inverter Operating State",
+      "ID": 302,
+      "Group": 38
+    },
+    {
+      "Name": "Inverter Enabled",
+      "ID": 303,
+      "Group": 38
+    },
+    {
+      "Name": "Sailing Time to Waypoint",
+      "ID": 304,
+      "Group": 35
+    },
+    {
+      "Name": "Sailing Distance to Waypoint",
+      "ID": 305,
+      "Group": 35
+    },
+    {
+      "Name": "Sailing ETA",
+      "ID": 306,
+      "Group": 35
+    },
+    {
+      "Name": "Latitude",
+      "ID": 309,
+      "Group": 1
+    },
+    {
+      "Name": "Longitude",
+      "ID": 310,
+      "Group": 1
+    }
+  ],
+  "SettingItems": [
+    {
+      "Name": "Backlight Level",
+      "ID": 1,
+      "Group": "Display",
+      "Type": 3
+    },
+    {
+      "Name": "Night Mode",
+      "ID": 2,
+      "Group": "Display",
+      "Type": 2
+    },
+    {
+      "Name": "Trip Log 1 Enabled",
+      "ID": 3,
+      "Group": "Trip Log",
+      "Type": 2
+    },
+    {
+      "Name": "Trip Log 2 Enabled",
+      "ID": 4,
+      "Group": "Trip Log",
+      "Type": 2
+    }
+  ],
+  "VesselStatuses": {
+    "Dangerous": 1,
+    "Safe": 2,
+    "Acquiring": 3,
+    "Acquiring Failed": 4,
+    "Out of Range": 5,
+    "Lost Out of Range": 6
+  },
+  "VesselTypes": {
+    "AIS": 1
+  }
+}

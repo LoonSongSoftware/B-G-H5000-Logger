@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\h5000-logger-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\bg-websocket-session-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\bg-observation-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\json\jsoncpp.cpp">
+      <Filter>src\json</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\json.h">
+      <Filter>include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\json-forwards.h">
+      <Filter>include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\h5000-logger-class.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bg-websocket-session-class.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bg-observation-class.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{42fcfcff-c947-4d63-8505-6067bb7883fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{8e2c2c81-534f-4a61-b5d9-930565260d74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{8ba94e1a-af6a-47dd-b06d-628675144f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\json">
+      <UniqueIdentifier>{9a8e171d-edab-4092-8e12-7bb0ba950749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\json">
+      <UniqueIdentifier>{12b263f6-5331-4537-ae14-77cca64b118b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\BgDataDefs.json">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="USE-CASE.md">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="BUILD-LINUX.md">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\BUILD-WINDOWS.md">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+</Project>
