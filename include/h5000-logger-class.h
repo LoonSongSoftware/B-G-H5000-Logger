@@ -22,7 +22,7 @@
 using namespace std;
 
 // Output progress to console only if in test mode
-#define TESTOUT(x) if (!m_testMode) cout << x << endl;
+#define TESTOUT(x) if (m_testMode) cout << x << endl;
 #define NOTEST
 
 class H5000Logger {

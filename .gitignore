@@ -1,0 +1,9 @@
+build/vs2019/x64/Debug
+build/vs2019/Debug
+build/gcc/*.o
+.vs/
+*.csv
+*.log
+h5000-logger
+.obj
+
