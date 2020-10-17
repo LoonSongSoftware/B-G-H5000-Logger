@@ -99,237 +99,331 @@
     {
       "Name": "Altitude",
       "ID": 1,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "Altitude",
+      "ExpColumn":  36       
     },
     {
       "Name": "Position Error",
       "ID": 3,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "GpsPosError",
+      "ExpColumn": 200
     },
     {
       "Name": "HDOP",
       "ID": 4,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "HDOP",
+      "ExpColumn": 201
     },
     {
       "Name": "VDOP",
       "ID": 5,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "VDOP",
+      "ExpColumn": 202
     },
     {
       "Name": "TDOP",
       "ID": 6,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "TDOP",
+      "ExpColumn": 203
     },
     {
       "Name": "PDOP",
       "ID": 7,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "PDOP",
+      "ExpColumn": 33
     },
     {
       "Name": "Geoidal Separation",
       "ID": 8,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "GeoSep",
+      "ExpColumn": 37
     },
     {
       "Name": "COG",
       "ID": 9,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "COG",
+      "ExpColumn": 41
     },
     {
       "Name": "Position Quality",
       "ID": 10,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "GpQual",
+      "ExpColumn": 32
     },
     {
       "Name": "Position Integrity",
       "ID": 11,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "GpsIntegrity",
+      "ExpColumn": 204
     },
     {
       "Name": "Satellites in View",
       "ID": 12,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "GpsNum",
+      "ExpColumn": 34
     },
     {
       "Name": "WAAS Status",
       "ID": 13,
-      "Group": 28
+      "Group": 28,
+      "ExpName": "WaasStatus",
+      "ExpColumn": 205
     },
     {
       "Name": "Bearing (to Waypoint)",
       "ID": 14,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "BTW",
+      "ExpColumn": 206
     },
     {
       "Name": "Bearing Origin to Waypoint",
       "ID": 15,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "BOTW",
+      "ExpColumn": 207
     },
     {
       "Name": "Course to Steer",
       "ID": 17,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "CTS",
+      "ExpColumn": 208
     },
     {
       "Name": "Cross Track Error",
       "ID": 18,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "XTE",
+      "ExpColumn": 209
     },
     {
       "Name": "VMG to Waypoint",
       "ID": 19,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "VmgWpt",
+      "ExpColumn": 210
     },
     {
       "Name": "Destination",
       "ID": 20,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "Dest",
+      "ExpColumn": 211
     },
     {
       "Name": "Distance to Turn",
       "ID": 21,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "Dist2Turn",
+      "ExpColumn": 212
     },
     {
       "Name": "Distance to Destination",
       "ID": 22,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "Dist2Dest",
+      "ExpColumn": 213
     },
     {
       "Name": "Time to Turn",
       "ID": 23,
-      "Group": 29
+      "Group": 29,
+      "ExpName": "Time2Turn",
+      "ExpColumn": 214
     },
     {
       "Name": "Time to Destination",
       "ID": 24,
-      "Group": 29
+      "Group": 29,
+      "ExpName": "Time2Dest",
+      "ExpColumn": 215
     },
     {
       "Name": "ETA at Turn",
       "ID": 25,
-      "Group": 29
+      "Group": 29,
+      "ExpName": "EtaTurn",
+      "ExpColumn": 216
     },
     {
       "Name": "ETA at Destination",
       "ID": 26,
-      "Group": 29
+      "Group": 29,
+      "ExpName": "EtaDest",
+      "ExpColumn": 217
     },
     {
       "Name": "Total Distance",
       "ID": 27,
-      "Group": 29
+      "Group": 29,
+      "ExpName": "TotDist",
+      "ExpColumn": 218
     },
     {
       "Name": "Steer Arrow",
       "ID": 28,
-      "Group": 2
+      "Group": 2,
+      "ExpName": "SteerArrow",
+      "ExpColumn": 219
     },
     {
       "Name": "Odometer",
       "ID": 29,
-      "Group": 6
+      "Group": 6,
+      "ExpName": "Odometer",
+      "ExpColumn": 220
     },
     {
       "Name": "Trip Distance",
       "ID": 30,
-      "Group": 6
+      "Group": 6,
+      "ExpName": "TripDist",
+      "ExpColumn": 221
     },
     {
       "Name": "Trip Time",
       "ID": 31,
-      "Group": 6
+      "Group": 6,
+      "ExpName": "TripTime",
+      "ExpColumn": 222
     },
     {
       "Name": "Local Date",
       "ID": 32,
-      "Group": 7
+      "Group": 7,
+      "ExpName": "LocalDate",
+      "ExpColumn": 223
     },
     {
       "Name": "Local Time",
       "ID": 33,
-      "Group": 7
+      "Group": 7,
+      "ExpName": "LocalTime",
+      "ExpColumn": 224
     },
     {
       "Name": "UTC Date",
       "ID": 34,
-      "Group": 7
+      "Group": 7,
+      "ExpName": "UtcDate",
+      "ExpColumn": 225
     },
     {
       "Name": "UTC Time",
       "ID": 35,
-      "Group": 7
+      "Group": 7,
+      "ExpName": "UtcTime",
+      "ExpColumn": 226
     },
     {
       "Name": "Local Time Offset",
       "ID": 36,
-      "Group": 7
+      "Group": 7,
+      "ExpName": "LocalTimeOff",
+      "ExpColumn": 227
     },
     {
       "Name": "Heading",
       "ID": 37,
-      "Group": 3
+      "Group": 3,
+      "ExpName": "HDG",
+      "ExpColumn": 13
     },
     {
       "Name": "Voltage",
       "ID": 38,
-      "Group": 27
+      "Group": 27,
+      "ExpName": "Volts",
+      "ExpColumn": 30
     },
     {
       "Name": "Current Set",
       "ID": 39,
-      "Group": 27
+      "Group": 27,
+      "ExpName": "Set",
+      "ExpColumn": 11
     },
     {
       "Name": "Current Drift",
       "ID": 40,
-      "Group": 27
+      "Group": 27,
+      "ExpName": "Drift",
+      "ExpColumn": 12
     },
     {
       "Name": "SOG",
       "ID": 41,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "SOG",
+      "ExpColumn": 42
     },
     {
       "Name": "Water Speed",
       "ID": 42,
-      "Group": 4
+      "Group": 4,
+      "ExpName": "BSP",
+      "ExpColumn": 3
     },
     {
       "Name": "Pitot Speed",
       "ID": 43,
-      "Group": 3
+      "Group": 3,
+      "ExpName": "PitotSpd",
+      "ExpColumn": 228
     },
     {
       "Name": "Average Trip Speed",
       "ID": 44,
-      "Group": 6
+      "Group": 6,
+      "ExpName": "AvgTripSpd",
+      "ExpColumn": 229
     },
     {
       "Name": "Maximum Trip Speed",
       "ID": 45,
-      "Group": 6
+      "Group": 6,
+      "ExpName": "MaxTripSpd",
+      "ExpColumn": 230
     },
     {
       "Name": "Apparent Wind Speed",
       "ID": 46,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "AWS",
+      "ExpColumn": 5
     },
     {
       "Name": "True Wind Speed",
       "ID": 47,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "TWS",
+      "ExpColumn": 7
     },
     {
       "Name": "Water Temperature",
       "ID": 48,
-      "Group": 4
+      "Group": 4,
+      "ExpName": "SeaTemp",
+      "ExpColumn": 15
     },
     {
       "Name": "Outside Temperature",
       "ID": 49,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "AirTemp",
+      "ExpColumn": 14
     },
     {
       "Name": "Inside Temperature",
@@ -414,7 +508,9 @@
     {
       "Name": "Atmospheric Pressure",
       "ID": 66,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "Baro",
+      "ExpColumn": 16
     },
     {
       "Name": "Engine Boost Pressure",
@@ -459,7 +555,9 @@
     {
       "Name": "Depth",
       "ID": 77,
-      "Group": 4
+      "Group": 4,
+      "ExpName": "Depth",
+      "ExpColumn": 17
     },
     {
       "Name": "Water Distance",
@@ -650,17 +748,19 @@
     {
       "Name": "Rate of Turn",
       "ID": 121,
-      "Group": 3
+      "Group": 3,
+      "ExpName": "ROT",
+      "ExpColumn": 31
     },
     {
       "Name": "Yaw",
       "ID": 122,
-      "Group": 3
+      "Group": 3,
     },
     {
       "Name": "Pitch",
       "ID": 123,
-      "Group": 3
+      "Group": 3,
     },
     {
       "Name": "Roll",
@@ -740,17 +840,23 @@
     {
       "Name": "Apparent Wind Angle",
       "ID": 140,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "AWA",
+      "ExpColumn": 4
     },
     {
       "Name": "True Wind Angle",
       "ID": 141,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "TWA",
+      "ExpColumn": 6
     },
     {
       "Name": "True Wind Direction",
       "ID": 142,
-      "Group": 5
+      "Group": 5,
+      "ExpName": "TWD",
+      "ExpColumn": 8
     },
     {
       "Name": "Inside Humidity",
@@ -770,7 +876,9 @@
     {
       "Name": "Rudder Angle",
       "ID": 146,
-      "Group": 23
+      "Group": 23,
+      "ExpName": "Rudder",
+      "ExpColumn": 20
     },
     {
       "Name": "Transmission Gear",
@@ -1130,7 +1238,9 @@
     {
       "Name": "Boom Position",
       "ID": 220,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "Boom",
+      "ExpColumn": 121
     },
     {
       "Name": "Sailing Course",
@@ -1165,7 +1275,9 @@
     {
       "Name": "Mast Angle",
       "ID": 227,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "MastAng",
+      "ExpColumn": 24
     },
     {
       "Name": "Target True Wind Angle",
@@ -1200,12 +1312,16 @@
     {
       "Name": "Target Boat Speed",
       "ID": 234,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "TargetSpd",
+      "ExpColumn": 231
     },
     {
       "Name": "VMG to Wind",
       "ID": 235,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "VmgWnd",
+      "ExpColumn": 232
     },
     {
       "Name": "Time to Layline",
@@ -1225,17 +1341,23 @@
     {
       "Name": "Forestay",
       "ID": 239,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "Forestay",
+      "ExpColumn": 22
     },
     {
       "Name": "Polar Speed",
       "ID": 240,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "PolarSpd",
+      "ExpColumn": 233
     },
     {
       "Name": "Polar Performance",
       "ID": 241,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "PolarPct",
+      "ExpColumn": 234
     },
     {
       "Name": "Tacking Performance",
@@ -1555,12 +1677,16 @@
     {
       "Name": "Latitude",
       "ID": 309,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "Lat",
+      "ExpColumn": 39
     },
     {
       "Name": "Longitude",
       "ID": 310,
-      "Group": 1
+      "Group": 1,
+      "ExpName": "Lon",
+      "ExpColumn": 40
     }
   ],
   "SettingItems": [

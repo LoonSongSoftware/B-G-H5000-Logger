@@ -711,8 +711,11 @@ void H5000Logger::NewDate(unsigned long int utcdate)
     m_fout = fopen(MakeFileName(utcdate).c_str(), "w");
 
     // Write a line of column headings
-    string headings = "UtcDate,UtcTime,Cog,Hdg,Sog,Bsp,MBsp,MBspPrt,SpdThruWater,BspCorr,Mws,Aws,Tws,OrigTws,CorrMws,TwsCorr,Mwa,CorrMwa,Awa,Twa,";
-    headings += "OrigTwa,TwaCorr,MastWa,Twd,OrigTwd,TideSet,TideRate,TargetTwa,TargetSpd,PolarBsp,PolarPerf,Vmg\n";
+    //string headings = "UtcDate,UtcTime,Cog,Hdg,Sog,Bsp,MBsp,MBspPrt,SpdThruWater,BspCorr,Mws,Aws,Tws,OrigTws,CorrMws,TwsCorr,Mwa,CorrMwa,Awa,Twa,";
+    //headings += "OrigTwa,TwaCorr,MastWa,Twd,OrigTwd,TideSet,TideRate,TargetTwa,TargetSpd,PolarBsp,PolarPerf,Vmg\n";
+    string headings = "Boat,Utc,BSP,AWA,AWS,TWA,TWS,TWD,RudderFwd,Leeway,Set,Drift,HDG,AirTemp,SeaTemp,Baro,Depth,Heel,Trim,Rudder,Tab,Forestay,Downhaul,";
+    headings += "MastAng,FstayLen,MastButt,Load S,Load P,Rake,Volts,ROT,GpQual,PDOP,GpsNum,GpsAge,Altitude,GeoSep,GpsMode,Lat,Lon,COG,SOG,DiffStn,Error,";
+    headings += "RunnerS,RunnerP,Vang,Trav,Main,KeelAng,KeelHt,Board,Oil P,RPM 1,RPM 2,Board P"
     fputs(headings.c_str(), m_fout);
 
     // Clear the stored observations (and zero the time)
