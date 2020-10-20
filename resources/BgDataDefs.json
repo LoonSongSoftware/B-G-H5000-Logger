@@ -100,13 +100,15 @@
       "Name": "Altitude",
       "ID": 1,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "Altitude",
-      "ExpColumn":  36       
+      "ExpColumn": 36
     },
     {
       "Name": "Position Error",
       "ID": 3,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "GpsPosError",
       "ExpColumn": 200
     },
@@ -114,6 +116,7 @@
       "Name": "HDOP",
       "ID": 4,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "HDOP",
       "ExpColumn": 201
     },
@@ -121,6 +124,7 @@
       "Name": "VDOP",
       "ID": 5,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "VDOP",
       "ExpColumn": 202
     },
@@ -128,6 +132,7 @@
       "Name": "TDOP",
       "ID": 6,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "TDOP",
       "ExpColumn": 203
     },
@@ -135,6 +140,7 @@
       "Name": "PDOP",
       "ID": 7,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "PDOP",
       "ExpColumn": 33
     },
@@ -142,6 +148,7 @@
       "Name": "Geoidal Separation",
       "ID": 8,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "GeoSep",
       "ExpColumn": 37
     },
@@ -149,6 +156,7 @@
       "Name": "COG",
       "ID": 9,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "COG",
       "ExpColumn": 41
     },
@@ -156,6 +164,7 @@
       "Name": "Position Quality",
       "ID": 10,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "GpQual",
       "ExpColumn": 32
     },
@@ -163,6 +172,7 @@
       "Name": "Position Integrity",
       "ID": 11,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "GpsIntegrity",
       "ExpColumn": 204
     },
@@ -170,6 +180,7 @@
       "Name": "Satellites in View",
       "ID": 12,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "GpsNum",
       "ExpColumn": 34
     },
@@ -177,6 +188,7 @@
       "Name": "WAAS Status",
       "ID": 13,
       "Group": 28,
+      "TrackCsv": true,
       "ExpName": "WaasStatus",
       "ExpColumn": 205
     },
@@ -184,6 +196,7 @@
       "Name": "Bearing (to Waypoint)",
       "ID": 14,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "BTW",
       "ExpColumn": 206
     },
@@ -191,6 +204,7 @@
       "Name": "Bearing Origin to Waypoint",
       "ID": 15,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "BOTW",
       "ExpColumn": 207
     },
@@ -198,6 +212,7 @@
       "Name": "Course to Steer",
       "ID": 17,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "CTS",
       "ExpColumn": 208
     },
@@ -205,6 +220,7 @@
       "Name": "Cross Track Error",
       "ID": 18,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "XTE",
       "ExpColumn": 209
     },
@@ -212,6 +228,7 @@
       "Name": "VMG to Waypoint",
       "ID": 19,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "VmgWpt",
       "ExpColumn": 210
     },
@@ -219,6 +236,7 @@
       "Name": "Destination",
       "ID": 20,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "Dest",
       "ExpColumn": 211
     },
@@ -226,6 +244,7 @@
       "Name": "Distance to Turn",
       "ID": 21,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "Dist2Turn",
       "ExpColumn": 212
     },
@@ -233,6 +252,7 @@
       "Name": "Distance to Destination",
       "ID": 22,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "Dist2Dest",
       "ExpColumn": 213
     },
@@ -240,6 +260,7 @@
       "Name": "Time to Turn",
       "ID": 23,
       "Group": 29,
+      "TrackCsv": true,
       "ExpName": "Time2Turn",
       "ExpColumn": 214
     },
@@ -247,6 +268,7 @@
       "Name": "Time to Destination",
       "ID": 24,
       "Group": 29,
+      "TrackCsv": true,
       "ExpName": "Time2Dest",
       "ExpColumn": 215
     },
@@ -254,6 +276,7 @@
       "Name": "ETA at Turn",
       "ID": 25,
       "Group": 29,
+      "TrackCsv": true,
       "ExpName": "EtaTurn",
       "ExpColumn": 216
     },
@@ -261,6 +284,7 @@
       "Name": "ETA at Destination",
       "ID": 26,
       "Group": 29,
+      "TrackCsv": true,
       "ExpName": "EtaDest",
       "ExpColumn": 217
     },
@@ -268,6 +292,7 @@
       "Name": "Total Distance",
       "ID": 27,
       "Group": 29,
+      "TrackCsv": true,
       "ExpName": "TotDist",
       "ExpColumn": 218
     },
@@ -275,6 +300,7 @@
       "Name": "Steer Arrow",
       "ID": 28,
       "Group": 2,
+      "TrackCsv": true,
       "ExpName": "SteerArrow",
       "ExpColumn": 219
     },
@@ -282,6 +308,7 @@
       "Name": "Odometer",
       "ID": 29,
       "Group": 6,
+      "TrackCsv": true,
       "ExpName": "Odometer",
       "ExpColumn": 220
     },
@@ -289,6 +316,7 @@
       "Name": "Trip Distance",
       "ID": 30,
       "Group": 6,
+      "TrackCsv": true,
       "ExpName": "TripDist",
       "ExpColumn": 221
     },
@@ -296,6 +324,7 @@
       "Name": "Trip Time",
       "ID": 31,
       "Group": 6,
+      "TrackCsv": true,
       "ExpName": "TripTime",
       "ExpColumn": 222
     },
@@ -303,6 +332,7 @@
       "Name": "Local Date",
       "ID": 32,
       "Group": 7,
+      "TrackCsv": true,
       "ExpName": "LocalDate",
       "ExpColumn": 223
     },
@@ -310,6 +340,7 @@
       "Name": "Local Time",
       "ID": 33,
       "Group": 7,
+      "TrackCsv": true,
       "ExpName": "LocalTime",
       "ExpColumn": 224
     },
@@ -317,6 +348,7 @@
       "Name": "UTC Date",
       "ID": 34,
       "Group": 7,
+      "TrackCsv": true,
       "ExpName": "UtcDate",
       "ExpColumn": 225
     },
@@ -324,6 +356,7 @@
       "Name": "UTC Time",
       "ID": 35,
       "Group": 7,
+      "TrackCsv": true,
       "ExpName": "UtcTime",
       "ExpColumn": 226
     },
@@ -331,6 +364,7 @@
       "Name": "Local Time Offset",
       "ID": 36,
       "Group": 7,
+      "TrackCsv": true,
       "ExpName": "LocalTimeOff",
       "ExpColumn": 227
     },
@@ -338,6 +372,7 @@
       "Name": "Heading",
       "ID": 37,
       "Group": 3,
+      "TrackCsv": true,
       "ExpName": "HDG",
       "ExpColumn": 13
     },
@@ -345,6 +380,7 @@
       "Name": "Voltage",
       "ID": 38,
       "Group": 27,
+      "TrackCsv": true,
       "ExpName": "Volts",
       "ExpColumn": 30
     },
@@ -352,6 +388,7 @@
       "Name": "Current Set",
       "ID": 39,
       "Group": 27,
+      "TrackCsv": true,
       "ExpName": "Set",
       "ExpColumn": 11
     },
@@ -359,6 +396,7 @@
       "Name": "Current Drift",
       "ID": 40,
       "Group": 27,
+      "TrackCsv": true,
       "ExpName": "Drift",
       "ExpColumn": 12
     },
@@ -366,6 +404,7 @@
       "Name": "SOG",
       "ID": 41,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "SOG",
       "ExpColumn": 42
     },
@@ -373,6 +412,7 @@
       "Name": "Water Speed",
       "ID": 42,
       "Group": 4,
+      "TrackCsv": true,
       "ExpName": "BSP",
       "ExpColumn": 3
     },
@@ -380,6 +420,7 @@
       "Name": "Pitot Speed",
       "ID": 43,
       "Group": 3,
+      "TrackCsv": true,
       "ExpName": "PitotSpd",
       "ExpColumn": 228
     },
@@ -387,6 +428,7 @@
       "Name": "Average Trip Speed",
       "ID": 44,
       "Group": 6,
+      "TrackCsv": true,
       "ExpName": "AvgTripSpd",
       "ExpColumn": 229
     },
@@ -394,6 +436,7 @@
       "Name": "Maximum Trip Speed",
       "ID": 45,
       "Group": 6,
+      "TrackCsv": true,
       "ExpName": "MaxTripSpd",
       "ExpColumn": 230
     },
@@ -401,6 +444,7 @@
       "Name": "Apparent Wind Speed",
       "ID": 46,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "AWS",
       "ExpColumn": 5
     },
@@ -408,6 +452,7 @@
       "Name": "True Wind Speed",
       "ID": 47,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "TWS",
       "ExpColumn": 7
     },
@@ -415,6 +460,7 @@
       "Name": "Water Temperature",
       "ID": 48,
       "Group": 4,
+      "TrackCsv": true,
       "ExpName": "SeaTemp",
       "ExpColumn": 15
     },
@@ -422,6 +468,7 @@
       "Name": "Outside Temperature",
       "ID": 49,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "AirTemp",
       "ExpColumn": 14
     },
@@ -509,6 +556,7 @@
       "Name": "Atmospheric Pressure",
       "ID": 66,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "Baro",
       "ExpColumn": 16
     },
@@ -556,6 +604,7 @@
       "Name": "Depth",
       "ID": 77,
       "Group": 4,
+      "TrackCsv": true,
       "ExpName": "Depth",
       "ExpColumn": 17
     },
@@ -749,18 +798,19 @@
       "Name": "Rate of Turn",
       "ID": 121,
       "Group": 3,
+      "TrackCsv": true,
       "ExpName": "ROT",
       "ExpColumn": 31
     },
     {
       "Name": "Yaw",
       "ID": 122,
-      "Group": 3,
+      "Group": 3
     },
     {
       "Name": "Pitch",
       "ID": 123,
-      "Group": 3,
+      "Group": 3
     },
     {
       "Name": "Roll",
@@ -841,6 +891,7 @@
       "Name": "Apparent Wind Angle",
       "ID": 140,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "AWA",
       "ExpColumn": 4
     },
@@ -848,6 +899,7 @@
       "Name": "True Wind Angle",
       "ID": 141,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "TWA",
       "ExpColumn": 6
     },
@@ -855,6 +907,7 @@
       "Name": "True Wind Direction",
       "ID": 142,
       "Group": 5,
+      "TrackCsv": true,
       "ExpName": "TWD",
       "ExpColumn": 8
     },
@@ -877,6 +930,7 @@
       "Name": "Rudder Angle",
       "ID": 146,
       "Group": 23,
+      "TrackCsv": true,
       "ExpName": "Rudder",
       "ExpColumn": 20
     },
@@ -1239,6 +1293,7 @@
       "Name": "Boom Position",
       "ID": 220,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "Boom",
       "ExpColumn": 121
     },
@@ -1271,6 +1326,7 @@
       "Name": "Leeway",
       "ID": 226,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "Leewawy",
       "ExpColumn": 10
     },
@@ -1278,6 +1334,7 @@
       "Name": "Mast Angle",
       "ID": 227,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "MastAng",
       "ExpColumn": 24
     },
@@ -1315,6 +1372,7 @@
       "Name": "Target Boat Speed",
       "ID": 234,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "TargetSpd",
       "ExpColumn": 231
     },
@@ -1322,6 +1380,7 @@
       "Name": "VMG to Wind",
       "ID": 235,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "VmgWnd",
       "ExpColumn": 232
     },
@@ -1344,6 +1403,7 @@
       "Name": "Forestay",
       "ID": 239,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "Forestay",
       "ExpColumn": 22
     },
@@ -1351,6 +1411,7 @@
       "Name": "Polar Speed",
       "ID": 240,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "PolarSpd",
       "ExpColumn": 233
     },
@@ -1358,6 +1419,7 @@
       "Name": "Polar Performance",
       "ID": 241,
       "Group": 35,
+      "TrackCsv": true,
       "ExpName": "PolarPct",
       "ExpColumn": 234
     },
@@ -1680,6 +1742,7 @@
       "Name": "Latitude",
       "ID": 309,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "Lat",
       "ExpColumn": 39
     },
@@ -1687,8 +1750,1137 @@
       "Name": "Longitude",
       "ID": 310,
       "Group": 1,
+      "TrackCsv": true,
       "ExpName": "Lon",
       "ExpColumn": 40
+    },
+    {
+      "Name": "Boat",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Boat",
+      "ExpColumn": 1
+    },
+    {
+      "Name": "Utc",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Utc",
+      "ExpColumn": 2
+    },
+    {
+      "Name": "RudderFwd",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RudderFwd",
+      "ExpColumn": 9
+    },
+    {
+      "Name": "Heel",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Heel",
+      "ExpColumn": 18
+    },
+    {
+      "Name": "Trim",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trim",
+      "ExpColumn": 19
+    },
+    {
+      "Name": "Tab",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Tab",
+      "ExpColumn": 21
+    },
+    {
+      "Name": "Downhaul",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Downhaul",
+      "ExpColumn": 23
+    },
+    {
+      "Name": "FStayLen",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "FStayLen",
+      "ExpColumn": 25
+    },
+    {
+      "Name": "MastButt",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MastButt",
+      "ExpColumn": 26
+    },
+    {
+      "Name": "Load S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Load S",
+      "ExpColumn": 27
+    },
+    {
+      "Name": "Load P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Load P",
+      "ExpColumn": 28
+    },
+    {
+      "Name": "Rake",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Rake",
+      "ExpColumn": 29
+    },
+    {
+      "Name": "GpsAge",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GpsAge",
+      "ExpColumn": 35
+    },
+    {
+      "Name": "GpsMode",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GpsMode",
+      "ExpColumn": 38
+    },
+    {
+      "Name": "DiffStn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DiffStn",
+      "ExpColumn": 43
+    },
+    {
+      "Name": "Error",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Error",
+      "ExpColumn": 44
+    },
+    {
+      "Name": "RunnerS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RunnerS",
+      "ExpColumn": 45
+    },
+    {
+      "Name": "RunnerP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RunnerP",
+      "ExpColumn": 46
+    },
+    {
+      "Name": "Vang",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Vang",
+      "ExpColumn": 47
+    },
+    {
+      "Name": "Trav",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trav",
+      "ExpColumn": 48
+    },
+    {
+      "Name": "Main",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Main",
+      "ExpColumn": 49
+    },
+    {
+      "Name": "KeelAng",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "KeelAng",
+      "ExpColumn": 50
+    },
+    {
+      "Name": "KeelHt",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "KeelHt",
+      "ExpColumn": 51
+    },
+    {
+      "Name": "Board",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Board",
+      "ExpColumn": 52
+    },
+    {
+      "Name": "Oil P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Oil P",
+      "ExpColumn": 53
+    },
+    {
+      "Name": "RPM 1",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RPM 1",
+      "ExpColumn": 54
+    },
+    {
+      "Name": "RPM 2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RPM 2",
+      "ExpColumn": 55
+    },
+    {
+      "Name": "Board P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Board P",
+      "ExpColumn": 56
+    },
+    {
+      "Name": "Board S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Bpard S",
+      "ExpColumn": 57
+    },
+    {
+      "Name": "DistToLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DistToLn",
+      "ExpColumn": 58
+    },
+    {
+      "Name": "RchTmToLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RchTmToLn",
+      "ExpColumn": 59
+    },
+    {
+      "Name": "RchDtToLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RchDtToLn",
+      "ExpColumn": 60
+    },
+    {
+      "Name": "GPS time",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GPS time",
+      "ExpColumn": 61
+    },
+    {
+      "Name": "TWD+90",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TWD+90",
+      "ExpColumn": 62
+    },
+    {
+      "Name": "TWD-90",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TWD-90",
+      "ExpColumn": 63
+    },
+    {
+      "Name": "Downhaul2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Downhaul2",
+      "ExpColumn": 64
+    },
+    {
+      "Name": "Mk Lat",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Mk Lat",
+      "ExpColumn": 65
+    },
+    {
+      "Name": "Mk Lon",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Mk Lon",
+      "ExpColumn": 66
+    },
+    {
+      "Name": "Port lat",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Port lat",
+      "ExpColumn": 67
+    },
+    {
+      "Name": "Port lon",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Port lon",
+      "ExpColumn": 68
+    },
+    {
+      "Name": "Stbd lat",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Stbd lat",
+      "ExpColumn": 69
+    },
+    {
+      "Name": "Stbd lon",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Stbd lon",
+      "ExpColumn": 70
+    },
+    {
+      "Name": "HPE",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "HPE",
+      "ExpColumn": 71
+    },
+    {
+      "Name": "RH",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RH",
+      "ExpColumn": 72
+    },
+    {
+      "Name": "Lead P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Lead P",
+      "ExpColumn": 73
+    },
+    {
+      "Name": "Lead S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Lead S",
+      "ExpColumn": 74
+    },
+    {
+      "Name": "BackStay",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "BackStay",
+      "ExpColumn": 75
+    },
+    {
+      "Name": "User 0",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 0",
+      "ExpColumn": 76
+    },
+    {
+      "Name": "User 1",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 1",
+      "ExpColumn": 77
+    },
+    {
+      "Name": "User 2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 2",
+      "ExpColumn": 78
+    },
+    {
+      "Name": "User 3",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 3",
+      "ExpColumn": 79
+    },
+    {
+      "Name": "User 4",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 4",
+      "ExpColumn": 80
+    },
+    {
+      "Name": "User 5",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 5",
+      "ExpColumn": 81
+    },
+    {
+      "Name": "User 6",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 6",
+      "ExpColumn": 82
+    },
+    {
+      "Name": "User 7",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 7",
+      "ExpColumn": 83
+    },
+    {
+      "Name": "User 8",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 8",
+      "ExpColumn": 84
+    },
+    {
+      "Name": "User 9",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 9",
+      "ExpColumn": 85
+    },
+    {
+      "Name": "User 10",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 10",
+      "ExpColumn": 86
+    },
+    {
+      "Name": "User 11",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 11",
+      "ExpColumn": 87
+    },
+    {
+      "Name": "User 12",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 12",
+      "ExpColumn": 88
+    },
+    {
+      "Name": "User 13",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 13",
+      "ExpColumn": 89
+    },
+    {
+      "Name": "User 14",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 14",
+      "ExpColumn": 90
+    },
+    {
+      "Name": "User 15",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 15",
+      "ExpColumn": 91
+    },
+    {
+      "Name": "User 16",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 16",
+      "ExpColumn": 92
+    },
+    {
+      "Name": "User 17",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 17",
+      "ExpColumn": 93
+    },
+    {
+      "Name": "User 18",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 18",
+      "ExpColumn": 94
+    },
+    {
+      "Name": "User 19",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 19",
+      "ExpColumn": 95
+    },
+    {
+      "Name": "User 20",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 20",
+      "ExpColumn": 96
+    },
+    {
+      "Name": "User 21",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 21",
+      "ExpColumn": 97
+    },
+    {
+      "Name": "User 22",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 22",
+      "ExpColumn": 98
+    },
+    {
+      "Name": "User 23",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 23",
+      "ExpColumn": 99
+    },
+    {
+      "Name": "User 24",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 24",
+      "ExpColumn": 100
+    },
+    {
+      "Name": "User 25",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 25",
+      "ExpColumn": 101
+    },
+    {
+      "Name": "User 26",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 26",
+      "ExpColumn": 102
+    },
+    {
+      "Name": "User 27",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 27",
+      "ExpColumn": 103
+    },
+    {
+      "Name": "User 28",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 28",
+      "ExpColumn": 104
+    },
+    {
+      "Name": "User 29",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 29",
+      "ExpColumn": 105
+    },
+    {
+      "Name": "User 30",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 30",
+      "ExpColumn": 106
+    },
+    {
+      "Name": "User 31",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "User 31",
+      "ExpColumn": 107
+    },
+    {
+      "Name": "TmToGun",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TmToGun",
+      "ExpColumn": 108
+    },
+    {
+      "Name": "TmToLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TmToLn",
+      "ExpColumn": 109
+    },
+    {
+      "Name": "Burn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Burn",
+      "ExpColumn": 110
+    },
+    {
+      "Name": "BelowLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "BelowLn",
+      "ExpColumn": 111
+    },
+    {
+      "Name": "GunBlwLn",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GunBlwLn",
+      "ExpColumn": 112
+    },
+    {
+      "Name": "WvSigHt",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WvSigHt",
+      "ExpColumn": 113
+    },
+    {
+      "Name": "WvSigPd",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WvSigPd",
+      "ExpColumn": 114
+    },
+    {
+      "Name": "WvMaxHt",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WvMaxHt",
+      "ExpColumn": 115
+    },
+    {
+      "Name": "WvMaxPd",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WvMaxPd",
+      "ExpColumn": 116
+    },
+    {
+      "Name": "Slam",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Slam",
+      "ExpColumn": 117
+    },
+    {
+      "Name": "Heave",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Heave",
+      "ExpColumn": 118
+    },
+    {
+      "Name": "MWA",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MWA",
+      "ExpColumn": 119
+    },
+    {
+      "Name": "MWS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MWS",
+      "ExpColumn": 120
+    },
+    {
+      "Name": "Twist",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Twist",
+      "ExpColumn": 122
+    },
+    {
+      "Name": "TackLossT",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TackLossT",
+      "ExpColumn": 123
+    },
+    {
+      "Name": "TackLossD",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TackLossD",
+      "ExpColumn": 124
+    },
+    {
+      "Name": "TrimRate",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TrimRate",
+      "ExpColumn": 125
+    },
+    {
+      "Name": "HeelRate",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "HeelRate",
+      "ExpColumn": 126
+    },
+    {
+      "Name": "DeflectorP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DeflectorP",
+      "ExpColumn": 127
+    },
+    {
+      "Name": "RudderP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RudderP",
+      "ExpColumn": 128
+    },
+    {
+      "Name": "RudderS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RudderS",
+      "ExpColumn": 129
+    },
+    {
+      "Name": "RudderToe",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RudderToe",
+      "ExpColumn": 130
+    },
+    {
+      "Name": "BspTr",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "BspTr",
+      "ExpColumn": 131
+    },
+    {
+      "Name": "FStayInner",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "FStayInner",
+      "ExpColumn": 132
+    },
+    {
+      "Name": "DeflectorS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DeflectorS",
+      "ExpColumn": 133
+    },
+    {
+      "Name": "Bobstay",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Bobstay",
+      "ExpColumn": 134
+    },
+    {
+      "Name": "Outhaul",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Outhaul",
+      "ExpColumn": 135
+    },
+    {
+      "Name": "D0 P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "D0 P",
+      "ExpColumn": 136
+    },
+    {
+      "Name": "D0 S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "D0 S",
+      "ExpColumn": 137
+    },
+    {
+      "Name": "D1 P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "D1 P",
+      "ExpColumn": 138
+    },
+    {
+      "Name": "D1 S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "D1 S",
+      "ExpColumn": 139
+    },
+    {
+      "Name": "V0 P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "V0 P",
+      "ExpColumn": 140
+    },
+    {
+      "Name": "V0 S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "V0 S",
+      "ExpColumn": 141
+    },
+    {
+      "Name": "V1 P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "V1 P",
+      "ExpColumn": 142
+    },
+    {
+      "Name": "V1 2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "V1 S",
+      "ExpColumn": 143
+    },
+    {
+      "Name": "BoomAng",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "BoomAng",
+      "ExpColumn": 144
+    },
+    {
+      "Name": "Cunningham",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Cunningham",
+      "ExpColumn": 145
+    },
+    {
+      "Name": "FStayInHal",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "FStayInHal",
+      "ExpColumn": 146
+    },
+    {
+      "Name": "JibFurl",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "JibFurl",
+      "ExpColumn": 147
+    },
+    {
+      "Name": "JibH",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "JibH",
+      "ExpColumn": 148
+    },
+    {
+      "Name": "MastCant",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MastCant",
+      "ExpColumn": 149
+    },
+    {
+      "Name": "J1",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "J1",
+      "ExpColumn": 150
+    },
+    {
+      "Name": "J2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "J2",
+      "ExpColumn": 151
+    },
+    {
+      "Name": "J3",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "J3",
+      "ExpColumn": 152
+    },
+    {
+      "Name": "J4",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "J4",
+      "ExpColumn": 153
+    },
+    {
+      "Name": "Foil P",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Foil P",
+      "ExpColumn": 154
+    },
+    {
+      "Name": "Foil S",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Foil S",
+      "ExpColumn": 155
+    },
+    {
+      "Name": "Reacher",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Reacher",
+      "ExpColumn": 156
+    },
+    {
+      "Name": "Blade",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Blade",
+      "ExpColumn": 157
+    },
+    {
+      "Name": "Staysail",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Staysail",
+      "ExpColumn": 158
+    },
+    {
+      "Name": "Solent",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Solent",
+      "ExpColumn": 159
+    },
+    {
+      "Name": "Tack",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Tack",
+      "ExpColumn": 160
+    },
+    {
+      "Name": "TackP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TackP",
+      "ExpColumn": 161
+    },
+    {
+      "Name": "TackS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TackS",
+      "ExpColumn": 162
+    },
+    {
+      "Name": "DeflectU",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DeflectU",
+      "ExpColumn": 163
+    },
+    {
+      "Name": "DeflectL",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DeflectL",
+      "ExpColumn": 164
+    },
+    {
+      "Name": "WinchP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WinchP",
+      "ExpColumn": 165
+    },
+    {
+      "Name": "WinchS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WinchS",
+      "ExpColumn": 166
+    },
+    {
+      "Name": "SpinP",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "SpinP",
+      "ExpColumn": 167
+    },
+    {
+      "Name": "SpinS",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "SpinS",
+      "ExpColumn": 168
+    },
+    {
+      "Name": "MainH",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MainH",
+      "ExpColumn": 169
+    },
+    {
+      "Name": "Mast2",
+      "ID": 0,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Mast2",
+      "ExpColumn": 170
     }
   ],
   "SettingItems": [

@@ -160,9 +160,9 @@
     <ClCompile Include="..\..\src\bg-observation-class.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\BgDataDefs.json" />
     <None Include="..\..\BUILD-WINDOWS.md" />
     <None Include="..\..\README.md" />
+    <None Include="..\..\resources\BgDataDefs.json" />
     <None Include="BUILD-LINUX.md" />
     <None Include="USE-CASE.md" />
   </ItemGroup>

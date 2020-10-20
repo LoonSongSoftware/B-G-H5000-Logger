@@ -61,9 +61,6 @@
     <None Include="..\..\README.md">
       <Filter>resources</Filter>
     </None>
-    <None Include="..\..\BgDataDefs.json">
-      <Filter>resources</Filter>
-    </None>
     <None Include="USE-CASE.md">
       <Filter>resources</Filter>
     </None>
@@ -71,6 +68,9 @@
       <Filter>resources</Filter>
     </None>
     <None Include="..\..\BUILD-WINDOWS.md">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\..\resources\BgDataDefs.json">
       <Filter>resources</Filter>
     </None>
   </ItemGroup>

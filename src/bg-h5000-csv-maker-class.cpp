@@ -13,6 +13,41 @@ BgH5000CsvMaker::BgH5000CsvMaker(int argc, char** argv):
 //    m_inputFile = argv[1];
 }
 
+string MakeCsvHeaders(Json::Value& dataDefs) 
+{
+
+    // DataItems is an array of JSON strings, one for each data item
+    vector<string> headers(MAX_CSV_COLUMNS);
+    size_t nCols = 0;   // Identifies the highest column actually populated
+    Json::Value items = dataDefs["DataItems"];
+    for (Json::Value::ArrayIndex i = 0; i != items.size(); i++)
+    {
+        Json::Value item = items[i];
+        if (item.isMember("TrackCsv"))
+        {
+            if (item.isMember("ExpName") && item.isMember("ExpColumn"))
+            {
+                // All required items are present
+                if (item["TrackCsv"].asBool())
+                {
+                    size_t col = item["ExpColumn"].asUInt();
+                    if (col > nCols) nCols = col + 1;
+                    string header = item["ExpName"].asString();
+                    headers[col-1] = header;
+
+                }
+            }
+            else
+            {
+                // todo identify the DataItem and specific missing element
+                cout << "Missing elements in BgDataDefs.json" << endl;
+                exit(1);
+            }
+        }
+    }
+    headers.resize(nCols);
+}
+
 int BgH5000CsvMaker::run()
 {
 
@@ -26,6 +61,8 @@ int BgH5000CsvMaker::run()
         cerr << "Couldn't open or read BgDataDefs.json" << endl;
         exit(-1);
     }
+
+    string m_csvHeaders = MakeCsvHeaders(m_bgDataDefs);
 
     cout << m_bgDataDefs.toStyledString() << endl;
 

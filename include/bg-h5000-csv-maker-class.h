@@ -7,6 +7,7 @@
 #include <bg-observation-class.h>
 #include "json/json.h"
 
+#define MAX_CSV_COLUMNS 500
 using namespace std;
 
 class BgH5000CsvMaker
