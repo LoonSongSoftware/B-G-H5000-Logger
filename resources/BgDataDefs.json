@@ -1270,7 +1270,9 @@
     {
       "Name": "Leeway",
       "ID": 226,
-      "Group": 35
+      "Group": 35,
+      "ExpName": "Leewawy",
+      "ExpColumn": 10
     },
     {
       "Name": "Mast Angle",

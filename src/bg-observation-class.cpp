@@ -48,6 +48,37 @@ BgObservation::BgObservation(Json::Value data) :
 }
 
 /**
+ * @brief Constructor (creates an Observation object from a string object).
+
+ * When the application is used off the boat (away from a live websocket
+ * session), the observation can be constructed from a line in the flatlog
+ * file.  This function takes the string associated with a single observation/
+ * single line in the file and creates an Observation object from it.
+ *
+ * @param data A string with the observation data (in flatlog format).
+*/
+BgObservation::BgObservation(string data) :
+    m_val(0), m_sysVal(0), m_inst(0), m_damped(false), m_dampedVal(0)
+{
+
+    size_t idx;
+    size_t start = 0;
+    m_id = stoul(data,&idx);
+    start += idx + 1;
+    m_valid = (stoul(data.substr(start), &idx) == 1);
+    start += idx + 1;
+    m_val = stod(data.substr(start), &idx);
+    start += idx + 1;
+    m_sysVal = stod(data.substr(start), &idx);
+    start += idx + 1;
+    m_dampedVal = stod(data.substr(start), &idx);
+    start += idx + 1;
+    m_inst = stoul(data.substr(start), &idx);
+    start += idx + 1;
+    m_damped = (stoul(data.substr(start), &idx) == 1);
+}
+
+/**
  * @brief Accessor for the 'id' value.
  * @return The data id for the observation.
 */

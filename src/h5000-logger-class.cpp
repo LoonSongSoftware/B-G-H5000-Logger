@@ -688,7 +688,9 @@ void H5000Logger::ProcessObservation(BgObservation& o) {
 */
 void H5000Logger::ProcessObservation(const char* buffer)
 {
-    BgObservation o(buffer);
+    // todo this may not work
+    string s = buffer;
+    BgObservation o(s);
     ProcessObservation(o);
 }
 
@@ -715,7 +717,7 @@ void H5000Logger::NewDate(unsigned long int utcdate)
     //headings += "OrigTwa,TwaCorr,MastWa,Twd,OrigTwd,TideSet,TideRate,TargetTwa,TargetSpd,PolarBsp,PolarPerf,Vmg\n";
     string headings = "Boat,Utc,BSP,AWA,AWS,TWA,TWS,TWD,RudderFwd,Leeway,Set,Drift,HDG,AirTemp,SeaTemp,Baro,Depth,Heel,Trim,Rudder,Tab,Forestay,Downhaul,";
     headings += "MastAng,FstayLen,MastButt,Load S,Load P,Rake,Volts,ROT,GpQual,PDOP,GpsNum,GpsAge,Altitude,GeoSep,GpsMode,Lat,Lon,COG,SOG,DiffStn,Error,";
-    headings += "RunnerS,RunnerP,Vang,Trav,Main,KeelAng,KeelHt,Board,Oil P,RPM 1,RPM 2,Board P"
+    headings += "RunnerS,RunnerP,Vang,Trav,Main,KeelAng,KeelHt,Board,Oil P,RPM 1,RPM 2,Board P";
     fputs(headings.c_str(), m_fout);
 
     // Clear the stored observations (and zero the time)

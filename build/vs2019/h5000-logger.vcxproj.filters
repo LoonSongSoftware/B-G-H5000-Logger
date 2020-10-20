@@ -16,6 +16,9 @@
     <ClCompile Include="..\..\src\json\jsoncpp.cpp">
       <Filter>src\json</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\bg-h5000-csv-maker-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\json.h">
@@ -31,6 +34,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\bg-observation-class.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bg-h5000-csv-maker-class.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

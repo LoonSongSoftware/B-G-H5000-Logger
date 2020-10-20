@@ -27,6 +27,7 @@ class BgObservation {
 public:
     // Member functions
     BgObservation(Json::Value data);	// Constructor (from JSON received from the H5000)
+    BgObservation(string data);         // Constructor (from string in flat log file)
     
     int getId();					// Accessor for the observation's id
     bool isValid();					// Accessor for the 'valid' member variable

@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\bg-h5000-csv-maker-class.h" />
     <ClInclude Include="..\..\include\bg-observation-class.h" />
     <ClInclude Include="..\..\include\bg-websocket-session-class.h" />
     <ClInclude Include="..\..\include\h5000-logger-class.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="..\..\include\json.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\bg-h5000-csv-maker-class.cpp" />
     <ClCompile Include="..\..\src\bg-websocket-session-class.cpp" />
     <ClCompile Include="..\..\src\h5000-logger-class.cpp" />
     <ClCompile Include="..\..\src\json\jsoncpp.cpp" />
