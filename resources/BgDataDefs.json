@@ -1,4 +1,5 @@
 {
+  "Comment": "This file contains...",
   "DataGroups": {
     "GPS": 1,
     "Navigation": 2,
@@ -100,9 +101,11 @@
       "Name": "Altitude",
       "ID": 1,
       "Group": 1,
-      "TrackCsv": true,
+      "ExpRequred":  true
       "ExpName": "Altitude",
-      "ExpColumn": 36
+      "ExpColumn": 36,
+      "Units": "m",
+      "Precision": 1
     },
     {
       "Name": "Position Error",
@@ -803,9 +806,12 @@
       "ExpColumn": 31
     },
     {
-      "Name": "Yaw",
+      "Name": "Trim",
       "ID": 122,
-      "Group": 3
+      "Group": 3,
+      "TrackCsv": true,
+      "ExpName": "Trim",
+      "ExpColumn": 19
     },
     {
       "Name": "Pitch",
@@ -820,7 +826,10 @@
     {
       "Name": "Magnetic Variation",
       "ID": 125,
-      "Group": 27
+      "Group": 27,
+      "TrackCsv": true,
+      "ExpName": "VAR",
+      "ExpColumn": 275
     },
     {
       "Name": "Deviation",
@@ -952,7 +961,10 @@
     {
       "Name": "Commanded Rudder Angle",
       "ID": 150,
-      "Group": 23
+      "Group": 23,
+      "TrackCsv": true,
+      "ExpName": "CMR",
+      "ExpColumn": 276
     },
     {
       "Name": "Rudder Limit",
@@ -987,7 +999,10 @@
     {
       "Name": "Position Fix Type",
       "ID": 157,
-      "Group": 28
+      "Group": 28,
+      "TrackCsv": true,
+      "ExpName": "GPF",
+      "ExpColumn": 277
     },
     {
       "Name": "Engine Discrete Status",
@@ -1023,6 +1038,14 @@
       "Name": "Internal Voltage",
       "ID": 164,
       "Group": 27
+    },
+    {
+      "Name": "Depth Offset",
+      "ID": 165,
+      "Group": 28,
+      "TrackCsv": true,
+      "ExpName": "DOF",
+      "ExpColumn": 278
     },
     {
       "Name": "Structure Depth",
@@ -1300,7 +1323,10 @@
     {
       "Name": "Sailing Course",
       "ID": 221,
-      "Group": 35
+      "Group": 35,
+      "TrackCsv": true,
+      "ExpName": "CRS",
+      "ExpColumn": 279
     },
     {
       "Name": "Daggerboard Position",
@@ -1313,9 +1339,12 @@
       "Group": 35
     },
     {
-      "Name": "Heading on Next Tack",
+      "Name": "Heading Opposite Tack",
       "ID": 224,
-      "Group": 35
+      "Group": 35,
+      "TrackCsv": true,
+      "ExpName": "HdgOppTack",
+      "ExpColumn": 257
     },
     {
       "Name": "Keel Angle",
@@ -1327,7 +1356,7 @@
       "ID": 226,
       "Group": 35,
       "TrackCsv": true,
-      "ExpName": "Leewawy",
+      "ExpName": "Leeway",
       "ExpColumn": 10
     },
     {
@@ -1341,7 +1370,10 @@
     {
       "Name": "Target True Wind Angle",
       "ID": 228,
-      "Group": 35
+      "Group": 35,
+      "TrackCsv": true,
+      "ExpName": "TargetTWA",
+      "ExpColumn": 235
     },
     {
       "Name": "Keel Trim Tab",
@@ -1351,7 +1383,10 @@
     {
       "Name": "Race Timer",
       "ID": 230,
-      "Group": 35
+      "Group": 35,
+      "TrackCsv": true,
+      "ExpName": "RaceTimer",
+      "ExpColumn": 236
     },
     {
       "Name": "Canard Angle",
@@ -1431,7 +1466,10 @@
     {
       "Name": "Wind Angle to Mast",
       "ID": 243,
-      "Group": 35
+      "Group": 35,
+      "TrackCsv": true,
+      "ExpName": "WndAngleMast",
+      "ExpColumn": 237
     },
     {
       "Name": "CAN Bus Voltage",
@@ -1753,6 +1791,366 @@
       "TrackCsv": true,
       "ExpName": "Lon",
       "ExpColumn": 40
+    },
+    {
+      "Name": "Dead Reckoning Bearing",
+      "ID": 317,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DRBearing",
+      "ExpColumn": 258
+    },
+    {
+      "Name": "Dead Reckoning Distance",
+      "ID": 318,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DRDistance",
+      "ExpColumn": 259
+    },
+    {
+      "Name": "StartLnDistToS",
+      "ID": 319,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnDistToS",
+      "ExpColumn": 238
+    },
+    {
+      "Name": "StartLnDistToP",
+      "ID": 320,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnDistToP",
+      "ExpColumn": 239
+    },
+    {
+      "Name": "DistToStartLn",
+      "ID": 321,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DistToStartLn",
+      "ExpColumn": 240
+    },
+    {
+      "Name": "Heel",
+      "ID": 325,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Heel",
+      "ExpColumn": 18
+    },
+    {
+      "Name": "Measured Wind Angle",
+      "ID": 331,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MeasuredWA",
+      "ExpColumn": 241
+    },
+    {
+      "Name": "Measured Wind Speed",
+      "ID": 332,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MeasuredWS",
+      "ExpColumn": 242
+    },
+    {
+      "Name": "Optimum Wind Angle",
+      "ID": 336,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "OptWA",
+      "ExpColumn": 260
+    },
+    {
+      "Name": "Start Line Port Position Latitude",
+      "ID": 340,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnPLat",
+      "ExpColumn": 280
+    },
+    {
+      "Name": "Start Line Port Position Longitude",
+      "ID": 341,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnPLon",
+      "ExpColumn": 281
+    },
+    {
+      "Name": "Start Line Starboard Position Latitude",
+      "ID": 352,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnSLat",
+      "ExpColumn": 282
+    },
+    {
+      "Name": "Start Line Starboard Position Longitude",
+      "ID": 353,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnSLon",
+      "ExpColumn": 283
+    },
+    {
+      "Name": "Start Line Bias",
+      "ID": 354,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnBias",
+      "ExpColumn": 261
+    },
+    {
+      "Name": "Trip 2 Time",
+      "ID": 355,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trip2Tm",
+      "ExpColumn": 284
+    },
+    {
+      "Name": "Trip 2 Distance",
+      "ID": 356,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trip2Dist",
+      "ExpColumn": 285
+    },
+    {
+      "Name": "VMG Performance",
+      "ID": 357,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "VMGPerf",
+      "ExpColumn": 262
+    },
+    {
+      "Name": "Trip 2 Speed Average",
+      "ID": 360,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trip2SpAvg",
+      "ExpColumn": 286
+    },
+    {
+      "Name": "Trip 2 Speed Max",
+      "ID": 361,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "Trip2SpMax",
+      "ExpColumn": 287
+    },
+    {
+      "Name": "TWA Correction",
+      "ID": 383,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TWACorr",
+      "ExpColumn": 243
+    },
+    {
+      "Name": "TWS Correction",
+      "ID": 384,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TWSCorr",
+      "ExpColumn": 244
+    },
+    {
+      "Name": "Red Phase",
+      "ID": 385,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "RedPhase",
+      "ExpColumn": 245
+    },
+    {
+      "Name": "Green Phase",
+      "ID": 386,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GreenPhase",
+      "ExpColumn": 246
+    },
+    {
+      "Name": "Blue Phase",
+      "ID": 387,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "BluePhase",
+      "ExpColumn": 247
+    },
+    {
+      "Name": "Corrected MWS",
+      "ID": 404,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "CorrMWS",
+      "ExpColumn": 248
+    },
+    {
+      "Name": "Corrected MWA",
+      "ID": 405,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "CorrMWA",
+      "ExpColumn": 249
+    },
+    {
+      "Name": "Orig TWS",
+      "ID": 406,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "OrigTWS",
+      "ExpColumn": 250
+    },
+    {
+      "Name": "Orig TWA",
+      "ID": 407,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "OrigTWA",
+      "ExpColumn": 251
+    },
+    {
+      "Name": "Orig TWD",
+      "ID": 408,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "OrigTWD",
+      "ExpColumn": 252
+    },
+    {
+      "Name": "Measured Boat Speed",
+      "ID": 409,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MeasuredBSP",
+      "ExpColumn": 253
+    },
+    {
+      "Name": "Distance Behind Start Line",
+      "ID": 414,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DistBehindStartLn",
+      "ExpColumn": 263
+    },
+    {
+      "Name": "Distance Behind Start Line (Boat Lengths)",
+      "ID": 415,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "DistBehindStartLnBL",
+      "ExpColumn": 264
+    },
+    {
+      "Name": "Measured Boat Speed Port",
+      "ID": 437,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "MeasuredBSPP",
+      "ExpColumn": 254
+    },
+    {
+      "Name": "Signed Leeway Angle",
+      "ID": 466,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "SignedLeewayAng",
+      "ExpColumn": 256
+    },
+    {
+      "Name": "Start Line Distance to Port (Boat Lengths)",
+      "ID": 467,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnDistPBL",
+      "ExpColumn": 265
+    },
+    {
+      "Name": "Start Line Distance to Starboard (Boat Lengths)",
+      "ID": 468,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "StartLnDistSBL",
+      "ExpColumn": 266
+    },
+    {
+      "Name": "Speed Through Water",
+      "ID": 497,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "SpdThruWater",
+      "ExpColumn": 255
+    },
+    {
+      "Name": "Pilot Active Perf Mode",
+      "ID": 498,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "PilotPerfMode",
+      "ExpColumn": 267
+    },
+    {
+      "Name": "Pilot Gust Bear Away",
+      "ID": 499,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "GBA",
+      "ExpColumn": 268
+    },
+    {
+      "Name": "Pilot TWS Bear Away",
+      "ID": 500,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "TWR",
+      "ExpColumn": 269
+    },
+    {
+      "Name": "Pilot Heel Compensation",
+      "ID": 501,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "HCP",
+      "ExpColumn": 270
+    },
+    {
+      "Name": "Pilot Net Course",
+      "ID": 502,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "NCR",
+      "ExpColumn": 271
+    },
+    {
+      "Name": "Pilot Target Wind Angle",
+      "ID": 503,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "PTW",
+      "ExpColumn": 272
+    },
+    {
+      "Name": "Pilot Weather Helm",
+      "ID": 504,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "WHL",
+      "ExpColumn": 273
+    },
+    {
+      "Name": "Pilot Mean Heel",
+      "ID": 505,
+      "Group": 0,
+      "TrackCsv": true,
+      "ExpName": "AHL",
+      "ExpColumn": 274
     },
     {
       "Name": "Boat",

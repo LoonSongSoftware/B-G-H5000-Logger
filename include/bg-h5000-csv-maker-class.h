@@ -15,15 +15,14 @@ class BgH5000CsvMaker
 public:
     BgH5000CsvMaker(int argc, char** argv);
     int run();
+private:
     void ProcessObservation(BgObservation& o);
-
     void NewDate(unsigned long int utcdate);
-
     void NewTime(unsigned long int utctime);
-
     void Clear();
-
+    bool AnalyzeDataDefs();
     string MakeFileName(unsigned long int utcdate);
+    string MakeHeaderString();
 
 private:
     string m_inputFile;
@@ -35,9 +34,18 @@ private:
     tm m_tmTimestamp = { 0,0,0,0 };
     Json::Value m_bgDataDefs;
 
-    array<double, 100> m_observations;
+    vector<double> m_observations;  // Vector of observations for this timestamp (overwritten for each new time)
+    map<int, int> m_bgToCsvMap;     // Map for translating B&G DataItem IDs to Expedition CSV columns
+    map<string, int> m_ExpNameToCsvCol; // Map to translate an Expedition column name to the corresponding column number
+    map<string, int> m_BgNameToBgID;    // Map to translate a B&G DataItem name to its corrsponding ID value
+    map<int, string> m_CsvColtoExpName; // Map to translate a column number to the corresponding Expedition column name
+    map<int, string> m_BgIDToBgName;    // Map to translate an ID value to the corresponding B&G DataItem name
+    vector<bool> m_obsSeen;         // Elements are set to True when the corresponding observation has been seen
+    vector<unsigned char> m_precisions; // Vector with precision (after decimal point) for each data item
 
-    enum class trackedData {
+    vector<string> m_csvTrackedItems;
+
+    enum class ztrackedData {
         // Date/time
         UtcDate, UtcTime,
 
