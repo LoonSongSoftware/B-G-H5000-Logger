@@ -186,8 +186,8 @@ void BgH5000CsvMaker::ProcessObservation(BgObservation& o) {
             csvColD = m_bgToCsvMap.at(o.getId()) - 1;
             csvColT = m_bgToCsvMap.at(35) - 1;
         }
-        catch (out_of_range) {
-            cout << "out of range 1" << endl;
+        catch (out_of_range &e) {
+            cout << "out of range: " << e.what() << endl;
             break;
         }
 
@@ -226,7 +226,8 @@ void BgH5000CsvMaker::ProcessObservation(BgObservation& o) {
             csvColT = m_bgToCsvMap.at(o.getId()) - 1;
             csvColD = m_bgToCsvMap.at(34) - 1;
         }
-        catch (out_of_range) {
+        catch (out_of_range &e) {
+            cout << "out of range 2: " << e.what() << endl;
             break;
         }
         m_observations[csvColT] = o.getVal();
@@ -267,7 +268,8 @@ void BgH5000CsvMaker::ProcessObservation(BgObservation& o) {
         try {
             csvColO = m_bgToCsvMap.at(o.getId()) - 1;
         }
-        catch (out_of_range) {
+        catch (out_of_range &e) {
+            cout << "out of range 2: " << e.what() << endl;
             break;
         }
         m_observations[csvColO] = o.getVal();
@@ -305,8 +307,8 @@ void BgH5000CsvMaker::NewDate(unsigned long int utcdate)
     try {
         csvColT = m_bgToCsvMap.at(35) - 1;
     }
-    catch (out_of_range) {
-        cerr << "Error in NewDate" << endl;
+    catch (out_of_range &e) {
+        cerr << "Error in NewDate: " << e.what() << endl;
         exit(-1);
     }
     m_obsSeen[csvColT] = false;
@@ -330,8 +332,8 @@ void BgH5000CsvMaker::NewTime(unsigned long int utctime)
         csvColCombo = m_ExpNameToCsvCol["Utc"] - 1;
         csvBoat = m_ExpNameToCsvCol["Boat"] - 1;
     }
-    catch (out_of_range) {
-        cerr << "Error in NewDate" << endl;
+    catch (out_of_range &e) {
+        cerr << "Error in NewDate: " << e.what() << endl;
         exit(-1);
     }
 
@@ -390,8 +392,8 @@ void BgH5000CsvMaker::Clear()
         csvColD = m_bgToCsvMap.at(34) - 1;
         csvColT = m_bgToCsvMap.at(35) - 1;
     }
-    catch (out_of_range) {
-        cerr << "Error in Clear" << endl;
+    catch (out_of_range &e) {
+        cerr << "Error in Clear: " << e.what() << endl;
         exit(-1);
     }
 

@@ -21,7 +21,7 @@
  * @param argc Number of arguments supplied on the command line.
  * @param argv Arguments supplied on the command line.
 */
-H5000Logger::H5000Logger(int argc, char** argv) : m_fpLog(NULL), m_testMode(false), m_fout(NULL), m_csvFile(NULL)
+H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL), m_testMode(false), m_fout(NULL)
 {
 	// Check command line arguments.
 	if (argc < 3)
