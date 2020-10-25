@@ -14,12 +14,24 @@ BgH5000CsvMaker::BgH5000CsvMaker(int argc, char** argv):
 //    m_inputFile = argv[1];
 }
 
+bool WriteToCsvTest(Json::Value& item)
+{
+    if (item.isMember("CsvTrack"))
+        if (item["CsvTrack"].asBool() == true)
+            return true;
+    if (item.isMember("CsvRequired"))
+    {
+        if (item["CsvRequired"].asBool() == true)
+            return true;
+    }
+    return false;
+}
 
 /**
  * @brief Construct an array of items to be tracked in the CSV file.
  * 
  * This function will examine the BgDataDefs.json file, identifying DataItem
- * elements that have a "TrackCsv" member equal to TRUE. It will populate a
+ * elements that have a "CsvTrack" member equal to TRUE. It will populate a
  * member variables (m_csvTrackedItems) with the names of the items/columns
  * to be written.
  * @return True if successful; otherwise, false.
@@ -34,48 +46,48 @@ bool BgH5000CsvMaker::AnalyzeDataDefs()
     // (a vector of strings with the Expedition name of the variable, in the
     // position corresponding to the CSV file column)
     m_csvTrackedItems.resize(MAX_CSV_COLUMNS);
+    m_precisions.resize(MAX_CSV_COLUMNS);
     size_t cols = 0;
     for (Json::Value::ArrayIndex i = 0; i != items.size(); i++)
     {
         Json::Value item = items[i];
-        if (item.isMember("TrackCsv"))
+        if (WriteToCsvTest(item))
         {
-            if (item.isMember("ExpName") && item.isMember("ExpColumn"))
+
+            if (!item.isMember("CsvHeader"))
             {
-                // All required items are present
-                if (item["TrackCsv"].asBool())
-                {
-                    // Determine which CSV column this is and extend the total count if necessary
-                    size_t col = item["ExpColumn"].asUInt();
-                    if (col > cols) cols = col + 1;
-
-                    // Save the ExpName (CSV column header) in the tracked items vector
-                    string header = item["ExpName"].asString();
-                    m_csvTrackedItems[col-1] = header;
-
-                    // Add this item to the B&G ID to CSV column map
-                    m_bgToCsvMap[item["ID"].asUInt()] = item["ExpColumn"].asUInt();
-
-                    // Add this item to the Expedition name to CSV column map
-                    m_ExpNameToCsvCol[item["ExpName"].asString()] = item["ExpColumn"].asUInt();
-
-                    // Add this item to the B&G DataItem name to ID map
-                    m_BgNameToBgID[item["Name"].asString()] = item["ID"].asUInt();
-
-                    m_BgIDToBgName[item["ID"].asUInt()] = item["Name"].asString();
-                    m_CsvColtoExpName[item["ExpColumn"].asUInt()] = item["ExpName"].asString();
-                    m_precisions[item["ExpColumn"].asUInt() - 1] = (unsigned char) item["Precision"].asUInt();
-                }
+                cout << "CsvColumn is missing for item ID: " << item["ID"].asUInt() << endl;
+                continue;
             }
-            else
+            if (!item.isMember("CsvColumn"))
             {
-                // todo identify the DataItem and specific missing element
-                cerr << "Missing elements in BgDataDefs.json" << endl;
-                exit(1);
+                cout << "CsvHeader is missing for item ID: " << item["ID"].asUInt() << endl;
+                continue;
             }
+
+            // All required items are present
+            // Determine which CSV column this is and extend the total count if necessary
+            size_t col = item["CsvColumn"].asUInt();
+            if (col > cols) cols = col + 1;
+
+            string header = item["CsvHeader"].asString();
+            m_csvTrackedItems[col-1] = header;
+            m_ExpNameToCsvCol[item["CsvHeader"].asString()] = item["CsvColumn"].asUInt();
+            m_CsvColtoExpName[item["CsvColumn"].asUInt()] = item["CsvHeader"].asString();
+            m_precisions[item["CsvColumn"].asUInt() - 1] = (unsigned char)item["Decimals"].asUInt();
+
+            // Add this item to the B&G ID to CSV column map
+            if (item.isMember("ID"))
+            {
+                m_bgToCsvMap[item["ID"].asUInt()] = item["CsvColumn"].asUInt();
+                m_BgIDToBgName[item["ID"].asUInt()] = item["Name"].asString();
+                m_BgNameToBgID[item["Name"].asString()] = item["ID"].asUInt();
+            }
+
         }
     }
     m_csvTrackedItems.resize(cols);
+    m_precisions.resize(cols);
     m_observations.resize(cols);
     m_obsSeen.resize(cols);
     return true;
@@ -175,6 +187,7 @@ void BgH5000CsvMaker::ProcessObservation(BgObservation& o) {
             csvColT = m_bgToCsvMap.at(35) - 1;
         }
         catch (out_of_range) {
+            cout << "out of range 1" << endl;
             break;
         }
 
@@ -310,21 +323,25 @@ void BgH5000CsvMaker::NewDate(unsigned long int utcdate)
 */
 void BgH5000CsvMaker::NewTime(unsigned long int utctime)
 {
-    unsigned int csvColT, csvColD, csvColCombo;
+    unsigned int csvColT, csvColD, csvColCombo, csvBoat;
     try {
         csvColT = m_bgToCsvMap.at(35) - 1;
         csvColD = m_bgToCsvMap.at(34) - 1;
         csvColCombo = m_ExpNameToCsvCol["Utc"] - 1;
+        csvBoat = m_ExpNameToCsvCol["Boat"] - 1;
     }
     catch (out_of_range) {
         cerr << "Error in NewDate" << endl;
         exit(-1);
     }
 
-    // Create an Excel-compatible "Utc" field
+    // Create an Excel-compatible "Utc" field and populate the "Boat" field with 0
     double UtcDateTime = m_observations[csvColD] + (m_observations[csvColT] / (24.0 * 60.0 * 60.0));
+    cout << setprecision(10) << UtcDateTime << endl;
     m_observations[csvColCombo] = UtcDateTime;
     m_obsSeen[csvColCombo] = true;
+    m_observations[csvBoat] = 0;
+    m_obsSeen[csvBoat] = true;
 
 
     // Create a string with the values in CSV format

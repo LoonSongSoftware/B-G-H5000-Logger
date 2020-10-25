@@ -21,7 +21,7 @@
  * @param argc Number of arguments supplied on the command line.
  * @param argv Arguments supplied on the command line.
 */
-H5000Logger::H5000Logger(int argc, char** argv) : m_fpLog(NULL), m_testMode(false), m_fout(NULL)
+H5000Logger::H5000Logger(int argc, char** argv) : m_fpLog(NULL), m_testMode(false), m_fout(NULL), m_csvFile(NULL)
 {
 	// Check command line arguments.
 	if (argc < 3)
@@ -39,6 +39,7 @@ H5000Logger::H5000Logger(int argc, char** argv) : m_fpLog(NULL), m_testMode(fals
 
 	m_host = argv[1];
 	m_port = argv[2];
+    m_csvFile = new BgH5000CsvMaker(argc, argv);
 }
 
 /**
@@ -225,7 +226,8 @@ void H5000Logger::handleData(Json::Value& root_)
                 WriteFlatLog(o);
             }
             if (m_csvFile) {
-                WriteCsv(o);
+                m_csvFile->ProcessObservation(o);
+                //WriteCsv(o);
             }
         }
     }
@@ -264,7 +266,7 @@ void H5000Logger::WriteFlatLog(BgObservation& o) {
     if (m_fpLog == NULL)
     {
         string filename = "flatlog.log";
-        m_fpLog = fopen(filename.c_str(), "w");
+        m_fpLog = fopen(filename.c_str(), "a");
     }
 
     // Write the string representation of the observation to the file
@@ -276,15 +278,16 @@ void H5000Logger::WriteFlatLog(BgObservation& o) {
         fflush(m_fpLog);
 }
 
+#if false
 /**
  * @brief Add an observation to the timestamp-based output log.
  *
  * @param o The observation to be added.
 */
 void H5000Logger::WriteCsv(BgObservation& o) {
-    ProcessObservation(o);
+    //ProcessObservation(o);
 }
-
+#endif
 
 /// //////////////////////////////////////////////////////////////
 // Helper routines
@@ -374,7 +377,7 @@ Json::Value H5000Logger::ConstructJson(string sJson)
     return json;
 }
 
-
+#if false
 /**
  * @brief Identify the type of an incoming observation and handle it accordingly.
  *
@@ -799,3 +802,4 @@ string H5000Logger::MakeFileName(unsigned long int utcdate)
 
     return string(buffer);
 }
+#endif
