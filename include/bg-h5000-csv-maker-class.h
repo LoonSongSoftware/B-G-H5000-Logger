@@ -15,6 +15,7 @@ class BgH5000CsvMaker
 public:
     BgH5000CsvMaker(int argc, char** argv);
     int run();
+    bool LoadDataDefs();
     void ProcessObservation(BgObservation& o);
 private:
     void NewDate(unsigned long int utcdate);

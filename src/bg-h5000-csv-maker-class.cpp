@@ -10,7 +10,7 @@
 BgH5000CsvMaker::BgH5000CsvMaker(int argc, char** argv):
     m_iFile(NULL), m_oFile(NULL)
 {
-    m_inputFile = "\\\\wfiles\\OtherData\\BulkData\\Sailing\\Logs\\B&G\\202010015 flatlog.log";
+    m_inputFile = "\\\\ufiles\\srv\\xfer\\20201025-flatlog.log";
 //    m_inputFile = argv[1];
 }
 
@@ -77,6 +77,7 @@ bool BgH5000CsvMaker::AnalyzeDataDefs()
             m_precisions[item["CsvColumn"].asUInt() - 1] = (unsigned char)item["Decimals"].asUInt();
 
             // Add this item to the B&G ID to CSV column map
+            cout << item.toStyledString() << endl;
             if (item.isMember("ID"))
             {
                 m_bgToCsvMap[item["ID"].asUInt()] = item["CsvColumn"].asUInt();
@@ -93,11 +94,8 @@ bool BgH5000CsvMaker::AnalyzeDataDefs()
     return true;
 }
 
-
-int BgH5000CsvMaker::run()
+bool BgH5000CsvMaker::LoadDataDefs()
 {
-
-    // Open BgDataDefs.json and load into a json object
     std::ifstream file("../../resources/BgDataDefs.json");
     if (file.is_open()) {
         file >> m_bgDataDefs;
@@ -114,10 +112,24 @@ int BgH5000CsvMaker::run()
         exit(-1);
     }
 
+    return true;
+}
+
+int BgH5000CsvMaker::run()
+{
+
+    // Open BgDataDefs.json and load into a json object
+    LoadDataDefs();
+
     // Open flat log file 
     if (m_iFile == NULL)
     {
         m_iFile = fopen(m_inputFile.c_str(), "r");
+        if (m_iFile == NULL)
+        {
+            cout << "Failed to open file: " << m_inputFile << endl;
+            exit(-1);
+        }
     }
 
     // Read each line in the file, passing it to BgH5000CsvMaker::ProcessObservation
@@ -269,7 +281,6 @@ void BgH5000CsvMaker::ProcessObservation(BgObservation& o) {
             csvColO = m_bgToCsvMap.at(o.getId()) - 1;
         }
         catch (out_of_range &e) {
-            cout << "out of range 2: " << e.what() << endl;
             break;
         }
         m_observations[csvColO] = o.getVal();

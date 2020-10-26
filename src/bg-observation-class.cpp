@@ -15,6 +15,7 @@
 */
 
 #include "bg-observation-class.h"
+#include <iomanip>
 
 /**
  * @brief Constructor (creates an Observation object from a Json::Value object).
@@ -118,7 +119,7 @@ double BgObservation::getVal()
 */
 string BgObservation::str() {
     stringstream s;
-    s << m_id << "," << m_valid << "," << m_val << "," << m_sysVal << "," << 
-        m_dampedVal << "," << m_inst << "," << m_damped << endl;
+    s << m_id << "," << m_valid << "," << m_inst << "," << m_damped << "," << setprecision(10) << m_val << "," 
+        << m_sysVal << "," << m_dampedVal << endl;
     return s.str();
 }
