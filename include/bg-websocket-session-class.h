@@ -1,5 +1,6 @@
 /**
     bg-websocket-session-class.h
+
     Code to establish, maintain, etc. the websocket connection.
 
     Copyright (c) 2020 D. Scott Miller. All rights reserved.

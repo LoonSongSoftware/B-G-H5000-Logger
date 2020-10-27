@@ -11,7 +11,7 @@
 */
 
 #include "h5000-logger-class.h"
-#include "bg-h5000-csv-maker-class.h"
+#include "bg-csv-output-class.h"
 
 /**
  * @brief Main entry point for the program.

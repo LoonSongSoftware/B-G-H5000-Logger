@@ -39,7 +39,7 @@ H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL)
 
 	m_host = argv[1];
 	m_port = argv[2];
-    m_csvFile = new BgH5000CsvMaker(argc, argv);
+    m_csvFile = new BgCsvOutput(argc, argv);
     m_csvFile->LoadDataDefs();
 }
 

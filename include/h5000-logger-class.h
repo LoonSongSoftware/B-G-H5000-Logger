@@ -15,7 +15,7 @@
 
 #include "bg-observation-class.h"
 #include "bg-websocket-session-class.h"
-#include "bg-h5000-csv-maker-class.h"
+#include "bg-csv-output-class.h"
 #include "json/json.h"
 #include <string>
 #include <vector>
@@ -61,7 +61,7 @@ private:
     string m_host;
     string m_port;
     bool m_logFile;											// indicates whather a .log file should be created
-    BgH5000CsvMaker* m_csvFile;											// indicates whather a .csv file should be created
+    BgCsvOutput* m_csvFile;											// indicates whather a .csv file should be created
     FILE* m_fpLog;											// pointer to the .log output file (if any)
     bool m_testMode;        // if true, just send one message and await response
 
