@@ -96,7 +96,7 @@ bool BgCsvOutput::AnalyzeDataDefs()
 
 bool BgCsvOutput::LoadDataDefs()
 {
-    std::ifstream file("../../resources/BgDataDefs.json");
+    std::ifstream file("BgDataDefs.json");
     if (file.is_open()) {
         file >> m_bgDataDefs;
         file.close();
