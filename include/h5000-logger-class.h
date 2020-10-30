@@ -16,6 +16,7 @@
 #include "bg-observation-class.h"
 #include "bg-websocket-session-class.h"
 #include "bg-csv-output-class.h"
+#include "bg-flat-output-class.h"
 #include "json/json.h"
 #include <string>
 #include <vector>
@@ -23,8 +24,7 @@
 using namespace std;
 
 // Output progress to console only if in test mode
-#define TESTOUT(x) if (m_debugFlag) cout << x << endl;
-#define NOTEST
+#define DEBUGOUT(x) if (m_testFlag || m_debugFlag) cout << x << endl;
 
 class H5000Logger {
 
@@ -75,10 +75,9 @@ private:
     string m_outDir;
     string m_inputLogFile;
 
-    bool m_logFile;											// indicates whather a .log file should be created
-    BgCsvOutput* m_csvFile;											// indicates whather a .csv file should be created
+    BgCsvOutput* m_csvFile;
+    BgFlatOutput* m_flatFile;
     FILE* m_fpLog;											// pointer to the .log output file (if any)
-    bool m_testMode;        // if true, just send one message and await response
 
     // Core actions
     void ProcessObservation(BgObservation& o);

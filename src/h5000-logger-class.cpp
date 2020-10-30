@@ -14,6 +14,12 @@
 #include "getopt/getopt.h"
 #include <fstream>
 
+/// ///////////////////////////////////////////////////////////////////////////
+// Public Member Functions
+/// ///////////////////////////////////////////////////////////////////////////
+
+#if (true)
+
 /**
  * @brief Constructor.
  * 
@@ -22,20 +28,11 @@
  * @param argc Number of arguments supplied on the command line.
  * @param argv Arguments supplied on the command line.
 */
-H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL), m_testMode(false), m_fout(NULL)
+H5000Logger::H5000Logger(int argc, char** argv) : 
+    m_csvFile(NULL), m_flatFile(NULL), m_fpLog(NULL), m_testFlag(false), m_fout(NULL)
 {
     // Check command line arguments and populate member variables.
     ProcessCommandLine(argc, argv);
-
-    if (m_csvFlag)
-    {
-        m_csvFile = new BgCsvOutput(argc, argv);
-        m_csvFile->LoadDataDefs();
-    }
-    if (m_flatFlag)
-    {
-        // todo open flatfile
-    }
 }
 
 /**
@@ -49,12 +46,34 @@ H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL)
 */
 int H5000Logger::run()
 {
+
+    // Create and initialize the CSV output class (if desired)
+    if (m_csvFlag)
+    {
+        m_csvFile = new BgCsvOutput(m_outDir, m_inputLogFile);
+        m_csvFile->LoadDataDefs();
+
+        // Special handling if the input should come from a flat log file,
+        // instead of live websocket data
+        if (m_inputLogFlag)
+        {
+            int nRet = m_csvFile->ProcessFlatLog();
+
+            // Exit after processing the flat log file
+            delete m_csvFile;
+            exit(nRet);
+        }
+    }
+
+    // Create and initialize the FLAT output class (if desired)
+    if (m_flatFlag)
+    {
+        m_flatFile = new BgFlatOutput(m_outDir);
+    }
+
     // The io_context is required for all I/O
     net::io_context ioc;
-
-    // Launch the asynchronous operation
-    // todo interpret command line output options
-    m_session = make_shared<BgWebsocketSession>(this, ioc, m_testMode);
+    m_session = make_shared<BgWebsocketSession>(this, ioc, m_testFlag);
     m_session ->run(m_host.c_str(), m_port.c_str());
 
     // Run the I/O service. The call will return when the socket is closed.
@@ -63,26 +82,34 @@ int H5000Logger::run()
     return EXIT_SUCCESS;
 }
 
+#endif
 
-/////////////////////////////////////////////////////////////////
+
+/// ///////////////////////////////////////////////////////////////////////////
 // Outgoing websocket message constructors
-/////////////////////////////////////////////////////////////////
+/// ///////////////////////////////////////////////////////////////////////////
+
+#if (true)
 
 /**
  * @brief Request all (relevant) values from the H5000 CPU.
  *
- * This function is called when the websocket handshake is successfully completed to start
- * the stream of data values coming from the websocket server.
+ * This function is called when the websocket handshake is successfully 
+ * completed to start the stream of data values coming from the websocket 
+ * server.
  *
  * @see on_handshake()
 */
 void H5000Logger::RequestAllValues() {
 
-    TESTOUT("Requesting dataitem values.")
+    // todo Remove hardwired value ids and replace with those "advertised" by the CPU.
+    // todo Periodically request a list of "advertised" value from the CPU (e.g., if new devices have appeared)
+
+    DEBUGOUT("Requesting dataitem info and values.")
 
     vector<int> dataitems = { 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 21, 23, 27, 30, 31, 32, 33, 34, 35, 37, 39, 40, 41, 42, 44, 45, 46 };
     RequestDataInfo(dataitems);
-    if (m_testMode)     // Just ask for one "batch" of values if in test mode
+    if (m_testFlag)     // Just ask for one "batch" of values if in test mode
         return;
     RequestDataValues(dataitems);
     
@@ -123,7 +150,8 @@ void H5000Logger::RequestAllValues() {
  * The constructed message requests updates of each value ("repeat: true")
  * and queries only instance=0.
  *
- * @param items_ A vector of integers, each representing a data id to be queried.
+ * @param items_ A vector of integers, each representing a data id to be 
+ *      queried.
 */
 void H5000Logger::RequestDataValues(vector<int> items_) {
 
@@ -157,11 +185,13 @@ void H5000Logger::RequestDataInfo(vector<int> items_) {
     m_session->send(make_shared<string>(sQuery));
 }
 
+#endif
 
 /// //////////////////////////////////////////////////////////////
 // Incoming websocket message handlers
 /// //////////////////////////////////////////////////////////////
 
+#if (true)
 /**
  * @brief Handles an incoming message by converting it to JSON, then calling the handler.
  *
@@ -170,8 +200,8 @@ void H5000Logger::RequestDataInfo(vector<int> items_) {
 void H5000Logger::handleResponse(string const& s)
 {
     // If we're in "test" mode, we're done--the response has already been displayed
-    if (m_testMode) {
-        TESTOUT("Test complete.")
+    if (m_testFlag) {
+        DEBUGOUT("Test complete.")
         exit(0);
     }
 
@@ -215,18 +245,27 @@ void H5000Logger::handleResponse(Json::Value& root_)
 void H5000Logger::handleData(Json::Value& root_)
 {
     for (Json::Value::ArrayIndex idx = 0; idx != root_.size(); idx++) {
+
+        // Construct a BgObservation object from the JSON data
         BgObservation o(root_[idx]);
+
+        // Process the data if the value is valid
         if (o.isValid())
         {
-            if (m_logFile) {
-                WriteFlatLog(o);
+            ProcessObservation(o);
+/*            if (m_flatFile != NULL) {
+                m_flatFile->ProcessObservation(o);
             }
-            if (m_csvFile) {
+            if (m_csvFile != NULL) {
                 m_csvFile->ProcessObservation(o);
-                //WriteCsv(o);
-            }
+            }*/
         }
     }
+}
+
+void H5000Logger::ProcessObservation(BgObservation& o)
+{
+
 }
 
 /**
@@ -246,53 +285,18 @@ void H5000Logger::handleMany(Json::Value& root_)
     }
 }
 
-
-/// //////////////////////////////////////////////////////////////
-// Log output functions
-/// //////////////////////////////////////////////////////////////
-
-/**
- * @brief Write an observation to the "flat" output log.
- *
- * @param o The observation to be written.
-*/
-void H5000Logger::WriteFlatLog(BgObservation& o) {
-
-    // If the flat log has not been opened, open it.
-    if (m_fpLog == NULL)
-    {
-        string filename = "flatlog.log";
-        m_fpLog = fopen(filename.c_str(), "a");
-    }
-
-    // Write the string representation of the observation to the file
-    fputs(o.str().c_str(), m_fpLog);
-
-    // Since we may not exit the application gracefully, flush the write buffer 
-    // every change in timestamp
-    if (o.getId() == 35)
-        fflush(m_fpLog);
-}
-
-#if false
-/**
- * @brief Add an observation to the timestamp-based output log.
- *
- * @param o The observation to be added.
-*/
-void H5000Logger::WriteCsv(BgObservation& o) {
-    //ProcessObservation(o);
-}
 #endif
 
 /// //////////////////////////////////////////////////////////////
 // Helper routines
 /// //////////////////////////////////////////////////////////////
 
+#if (true)
+
 void H5000Logger::ProcessCommandLine(int argc, char** argv)
 {
 
-    char opts[] = "h:p:o:dl:";
+    char opts[] = "h:p:o:dl:tcf";
     int opt;
     while ((opt = getopt(argc, argv, opts)) != -1)
     {
@@ -316,6 +320,15 @@ void H5000Logger::ProcessCommandLine(int argc, char** argv)
         case 'l':
             m_inputLogFile = optarg;
             m_inputLogFlag = true;
+            break;
+        case 't':
+            m_testFlag = true;
+            break;
+        case 'c':
+            m_csvFlag = true;
+            break;
+        case 'f':
+            m_flatFlag = true;
             break;
         default:
             std::cerr <<
@@ -411,429 +424,4 @@ Json::Value H5000Logger::ConstructJson(string sJson)
     return json;
 }
 
-#if false
-/**
- * @brief Identify the type of an incoming observation and handle it accordingly.
- *
- * After a BgObservation object is created from an incoming JSON message, this
- * function "handles" it.
- *
- * The key elements are UtcData (id=34) and UtcTime (id=35), which trigger new
- * output files (in the case of UtcData) and a new collection of observations
- * (in the case of UtcTime, if the new time is more than 1.5 seconds after the
- * most recent time previously observed).
- *
- * Other observation id's are either used to update tracked data or ignored.
- * (There are dozens of id's returned by an H5000 system with a lot of
- * connected devices, so it doesn't necessarily make sense to track them all.
- * But it is possible with some changes to the code in this function.)
- *
- * @param o A BgObservation object with the new data.
-*/
-void H5000Logger::ProcessObservation(BgObservation& o) {
-
-    // Select the handling code corresponding to the data id
-    switch (o.getId()) {
-
-    case 34:		// UTC (date)
-    {
-        // Convert the date from Julian Date to an Excel-compatible date (days since Jan 0, 1900)
-        m_observations[static_cast<int>(H5000Logger::trackedData::UtcDate)] = o.getVal() - 2415019;
-        unsigned long int utcdate = static_cast<int>(m_observations[static_cast<int>(H5000Logger::trackedData::UtcDate)]);
-
-        // Test to see if this is the first "datestamp" observed
-        if (m_rawTimestamp == 0)
-        {
-            // Test to see if a timestamp has been observed yet
-            if (((int)m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)]) != 0)
-            {
-                // OK. We've just observed the first datestamp and have 
-                // received a timestamp, so start a new output file for the 
-                // new date
-                NewDate(utcdate);
-            }
-        }
-        else {
-            // Test to see if the UTC Date has rolled over to the next day
-            // todo Build the test to see if the UTC date has changed
-            if (false) {
-                NewDate(utcdate);
-            }
-        }
-
-        // Set the date currently being tracked
-        m_date = o.strVal();
-        break;
-    }
-
-    case 35:		// UTC (time)
-    {
-        m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)] = o.getVal();
-        unsigned long int utctime = static_cast<int>(m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)]);
-
-        // Test to see if this is the first "timestamp" observed
-        if (m_rawTimestamp == 0)
-        {
-            // Test to see if a 'datestamp' has been observed yet
-            unsigned long int utcdate = static_cast<int>(m_observations[static_cast<int>(H5000Logger::trackedData::UtcDate)]);
-            if (utcdate != 0)
-            {
-                // OK. We've just observed the first timestamp and have 
-                // previously seen a 'datestamp,' so start a new output file 
-                // for the new date
-                NewDate(utcdate);
-
-                // Set the rawTimestamp
-                m_rawTimestamp = static_cast<uint64_t>(o.getVal());
-            }
-        }
-        else
-        {
-            // Test to see if this time is within 2 seconds of the current stamp
-            if (o.getVal() - m_rawTimestamp > 1.5)
-            {
-                NewTime(utctime);
-            }
-        }
-
-        // Set the time currently being tracked
-        m_time = o.strVal();
-        break;
-    }
-
-    case 9:			// COG
-        m_observations[static_cast<int>(H5000Logger::trackedData::Cog)] = o.getVal();
-        break;
-
-    case 37:		// HDG
-        m_observations[static_cast<int>(H5000Logger::trackedData::Hdg)] = o.getVal();
-        break;
-
-    case 39:		// SET
-        m_observations[static_cast<int>(H5000Logger::trackedData::TideSet)] = o.getVal();
-        break;
-
-    case 40:		// TIDE
-        m_observations[static_cast<int>(H5000Logger::trackedData::TideRate)] = o.getVal();
-        break;
-
-    case 41:		// SOG
-        m_observations[static_cast<int>(H5000Logger::trackedData::Sog)] = o.getVal();
-        break;
-
-    case 42:		// BSPD
-        m_observations[static_cast<int>(H5000Logger::trackedData::Bsp)] = o.getVal();
-        break;
-
-    case 46:		// AWS
-        m_observations[static_cast<int>(H5000Logger::trackedData::Aws)] = o.getVal();
-        break;
-
-    case 47:		// TWS
-        m_observations[static_cast<int>(H5000Logger::trackedData::Tws)] = o.getVal();
-        break;
-
-    case 140:		// AWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::Awa)] = o.getVal();
-        break;
-
-    case 141:		// TWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::Twa)] = o.getVal();
-        break;
-
-    case 142:		// TWD
-        m_observations[static_cast<int>(H5000Logger::trackedData::Twd)] = o.getVal();
-        break;
-
-    case 228:		// TGW Target TWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::TargetTwa)] = o.getVal();
-        break;
-
-    case 234:		// TGS Target Boat Speed
-        m_observations[static_cast<int>(H5000Logger::trackedData::TargetSpd)] = o.getVal();
-        break;
-
-    case 235:		// VMG
-        m_observations[static_cast<int>(H5000Logger::trackedData::Vmg)] = o.getVal();
-        break;
-
-    case 240:		// POL Polar Speed
-        m_observations[static_cast<int>(H5000Logger::trackedData::PolarBsp)] = o.getVal();
-        break;
-
-    case 241:		// POL Polar Performance
-        m_observations[static_cast<int>(H5000Logger::trackedData::PolarPerf)] = o.getVal();
-        break;
-
-    case 243:		// WAM Wind Angle to Mast
-        m_observations[static_cast<int>(H5000Logger::trackedData::MastWa)] = o.getVal();
-        break;
-
-    case 331:		// MWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::Mwa)] = o.getVal();
-        break;
-
-    case 332:		// MWS
-        m_observations[static_cast<int>(H5000Logger::trackedData::Mws)] = o.getVal();
-        break;
-
-    case 383:		// TAC TWA Correction
-        m_observations[static_cast<int>(H5000Logger::trackedData::TwaCorr)] = o.getVal();
-        break;
-
-    case 384:		// TWC TWS Correction
-        m_observations[static_cast<int>(H5000Logger::trackedData::TwsCorr)] = o.getVal();
-        break;
-
-    case 403:		// BSC Boat Speed Correction
-        m_observations[static_cast<int>(H5000Logger::trackedData::BspCorr)] = o.getVal();
-        break;
-
-    case 404:		// CWS CorrectedMWS
-        m_observations[static_cast<int>(H5000Logger::trackedData::CorrMws)] = o.getVal();
-        break;
-
-    case 405:		// CWA CorrectedMWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::CorrMwa)] = o.getVal();
-        break;
-
-    case 406:		// TS OrigTWS
-        m_observations[static_cast<int>(H5000Logger::trackedData::OrigTws)] = o.getVal();
-        break;
-
-    case 407:		// TA OrigTWA
-        m_observations[static_cast<int>(H5000Logger::trackedData::OrigTwa)] = o.getVal();
-        break;
-
-    case 408:		// TD OrigTWD
-        m_observations[static_cast<int>(H5000Logger::trackedData::OrigTwd)] = o.getVal();
-        break;
-
-    case 409:		// MBS MeasuredBSP
-        m_observations[static_cast<int>(H5000Logger::trackedData::MBsp)] = o.getVal();
-        break;
-
-    case 437:		// MeasuredBSPPort
-        m_observations[static_cast<int>(H5000Logger::trackedData::MBspPrt)] = o.getVal();
-        break;
-
-    case 438:		// MeasuredBSPStbd
-        m_observations[static_cast<int>(H5000Logger::trackedData::MBspStbd)] = o.getVal();
-        break;
-
-    case 497:		// SpdThruWater
-        m_observations[static_cast<int>(H5000Logger::trackedData::SpdThruWater)] = o.getVal();
-        break;
-
-        // The following data item id's/values will not be written to the .csv file
-    case 1:		// ALT
-    case 3:		// EPE
-    case 4:		// HDOP
-    case 5:		// VDOP
-    case 7:		// PDOP
-    case 8:		// GSEP
-    case 10:	// PQU
-    case 11:	// PIN
-    case 12:	// SATS
-    case 13:	// SDG
-    case 27:	// LOG
-    case 30:	// TP1
-    case 31:	// TP1	/??
-    case 44:	// AV1
-    case 45:	// MX1
-    case 77:	// DEP
-    case 121:	// ROT
-    case 122:	// TRM
-    case 125:	// VAR
-    case 146:	// RUD
-    case 150:	// CMR
-    case 157:	// GPF
-    case 165:	// DOF
-    case 221:	// CRS
-    case 224:	// HOT
-    case 226:	// LEE
-    case 230:	// TMR
-    case 309:	// BOW LAT
-    case 310:	// BOW LON
-    case 317:	// DRB
-    case 318:	// DRD
-    case 319:	// DPE
-    case 320:	// DSE
-    case 321:	// DLI
-    case 325:	// HEL
-    case 336:	// OWA
-    case 340:	// SLP LAT
-    case 341:	// SLP LON
-    case 352:	// SLS LAT
-    case 353:	// SLS LON
-    case 354:	// SLB
-    case 355:	// TP2
-    case 356:	// TP2
-    case 357:	// VMG
-    case 360:	// AV2
-    case 361:	// MX1
-    case 380:	// BSL
-    case 381:	// SLA
-    case 382:	// DLI
-    case 385:	// RED
-    case 386:	// GRN
-    case 387:	// BLU
-    case 391:	// PERP
-    case 392:	// ARR
-    case 398:	// AC1
-    case 399:	// AC2
-    case 400:	// AC3
-    case 401:	// AC4
-    case 402:	// DES
-    case 410:	// ULO
-    case 414:	// BLI
-    case 415:	// BLIB
-    case 420:	// SLA
-    case 421:	// GPS LAT
-    case 422:	// GPS LON
-    case 423:	// BPE
-    case 424:	// BSE
-    case 425:	// Opposite Tack COG
-    case 426:	// Opposite Tack Target Heading
-    case 439:	// ATWD
-    case 440:	// WPHS
-    case 441:	// LIFT
-    case 466:	// LEE
-    case 467:	// DPE
-    case 468:	// DSE
-    case 498:	// APM
-    case 499:	// GBA
-    case 500:	// TWR
-    case 501:	// HCP
-    case 502:	// NCR
-    case 503:	// PTW
-    case 504:	// WHL
-    case 505:	// AHL
-        break;
-
-    default:
-        // Print an alert if an unrecognized data item id is sent by the H5000.
-        cerr << "Unhandled value: " << o.getId() << endl;
-        break;
-    }
-}
-
-/**
- * @brief Create a BgObservation object from a JSON string, then process that observation.
- *
- * @param buffer_ A string containing JSON, representing an H5000 data observation.
-*/
-void H5000Logger::ProcessObservation(const char* buffer)
-{
-    // todo this may not work
-    string s = buffer;
-    BgObservation o(s);
-    ProcessObservation(o);
-}
-
-/**
- * @brief Start a new .csv file and re-initialize the collection of observations.
- *
- * @param utcdate_ An integer representation of the number of days since Jan 0, 1900.
-*/
-void H5000Logger::NewDate(unsigned long int utcdate)
-{
-    // Write the accumulated information for the most recent timestamp to 
-    // the .csv file, then close it (if the file was open in the first place)
-    if (m_fout != NULL) {
-        // todo check/fix date rollover 
-        NewTime(0);     // Cause the latest data to be written to the file
-        fclose(m_fout);
-    }
-
-    // Open a new .csv output file for observations from this new date
-    m_fout = fopen(MakeFileName(utcdate).c_str(), "w");
-
-    // Write a line of column headings
-    //string headings = "UtcDate,UtcTime,Cog,Hdg,Sog,Bsp,MBsp,MBspPrt,SpdThruWater,BspCorr,Mws,Aws,Tws,OrigTws,CorrMws,TwsCorr,Mwa,CorrMwa,Awa,Twa,";
-    //headings += "OrigTwa,TwaCorr,MastWa,Twd,OrigTwd,TideSet,TideRate,TargetTwa,TargetSpd,PolarBsp,PolarPerf,Vmg\n";
-    string headings = "Boat,Utc,BSP,AWA,AWS,TWA,TWS,TWD,RudderFwd,Leeway,Set,Drift,HDG,AirTemp,SeaTemp,Baro,Depth,Heel,Trim,Rudder,Tab,Forestay,Downhaul,";
-    headings += "MastAng,FstayLen,MastButt,Load S,Load P,Rake,Volts,ROT,GpQual,PDOP,GpsNum,GpsAge,Altitude,GeoSep,GpsMode,Lat,Lon,COG,SOG,DiffStn,Error,";
-    headings += "RunnerS,RunnerP,Vang,Trav,Main,KeelAng,KeelHt,Board,Oil P,RPM 1,RPM 2,Board P";
-    fputs(headings.c_str(), m_fout);
-
-    // Clear the stored observations (and zero the time)
-    Clear();
-    m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)] = 0.0;
-}
-
-/**
- * @brief Write the accumulated observations for the old timestamp to the file.
- *
- * When a new timestamp is observed, the existing observations are written to
- * the .csv output file (identified with the old timestamp), the tracked data
- * values are cleared, and a new collection of observations is started.
- *
- * @param utctime_ An integer representation of the number of seconds since midnight UTC.
-*/
-void H5000Logger::NewTime(unsigned long int utctime)
-{
-    // Create a string with the values in CSV format
-    stringstream ss;
-    for (int i = 0; i < static_cast<int>(H5000Logger::trackedData::MAX_ITEMS); i++)
-    {
-        ss << m_observations[i] << ",";
-    }
-    string s = ss.str();
-    s.pop_back();				// Remove trailing space
-    s += '\n';
-
-
-    // Write the line to the output file
-    fputs(s.c_str(), m_fout);
-    fflush(m_fout);
-
-    // Clear the stored observations (except date and time)
-    Clear();
-    m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)] = utctime;
-
-    // Set raw timestamp value
-    m_rawTimestamp = static_cast<uint64_t>(m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)]);
-}
-
-/**
- * @brief Clear accumulated observation data from the object.
- *
- * This function is called immediately after a timestamp set of values has been
- * written to the .csv file (so intermittent observations/values are dropped
- * and not carried forward).
-*/
-void H5000Logger::Clear()
-{
-    // Save the date and time most recently observed
-    double date = m_observations[static_cast<int>(H5000Logger::trackedData::UtcDate)];
-    double time = m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)];
-
-    // Clear the entire vector of data observation values
-    m_observations.fill(0.0);
-
-    // Restore the date and time values to initialize the new set of observations
-    m_observations[static_cast<int>(H5000Logger::trackedData::UtcDate)] = date;
-    m_observations[static_cast<int>(H5000Logger::trackedData::UtcTime)] = time;
-}
-
-/**
- * @brief Construct the .csv file name, including the date of the observations.
- *
- * @param utcdate_ An integer representing the number of days since Jan 0, 1900.
- * @return A string with the new file name.
-*/
-string H5000Logger::MakeFileName(unsigned long int utcdate)
-{
-    // Convert the Excel-format date to a tm struct (in UTC time)
-    double dateExcel = utcdate;
-    time_t tsUnix = (time_t)(dateExcel - 25569) * 86400;
-    struct tm* dateTm = gmtime(&tsUnix);
-
-    // Create the filename buffer, including the date
-    char buffer[100];
-    strftime(buffer, 100, "%Y%m%d-h5000-cpu-data.csv", dateTm);
-
-    return string(buffer);
-}
 #endif

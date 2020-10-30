@@ -38,14 +38,14 @@ class BgWebsocketSession : public std::enable_shared_from_this<BgWebsocketSessio
     H5000Logger* m_app;                                     // pointer to the application object (contains message handlers)
     std::string m_host;										// hostname (fqdn) or ip address of the websocket server
     bool m_debugFlag;
-    bool m_testMode;
+    bool m_testFlag;
     tcp::resolver m_resolver;								// for resolving fqdn to ip address
     websocket::stream<beast::tcp_stream> m_ws;				// the websocket communication object
     beast::flat_buffer m_buffer;								// a buffer to hold websocket i/o
     std::vector<std::shared_ptr<std::string const>> m_queue;	// a queue of messages to be sent to the h5000 websocket
 
 public:
-    explicit BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testMode);
+    explicit BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testFlag);
     ~BgWebsocketSession();
     void run(char const* host, char const* port);
     void send(shared_ptr<string const> const& ss);

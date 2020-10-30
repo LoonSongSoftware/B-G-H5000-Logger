@@ -22,6 +22,9 @@
     <ClCompile Include="..\..\src\getopt\getopt.cpp">
       <Filter>src\getopt</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\bg-flat-output-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\json.h">
@@ -44,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\getopt\getopt.h">
       <Filter>include\getopt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bg-flat-output-class.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

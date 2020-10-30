@@ -7,11 +7,9 @@
 #include <fstream>
 #include <iomanip>
 
-BgCsvOutput::BgCsvOutput(int argc, char** argv):
-    m_iFile(NULL), m_oFile(NULL)
+BgCsvOutput::BgCsvOutput(string& outDir, string& inputFlatLog):
+    m_iFile(NULL), m_oFile(NULL), m_inputFile(inputFlatLog), m_outDir(outDir)
 {
-    m_inputFile = "\\\\ufiles\\srv\\xfer\\20201025-flatlog.log";
-//    m_inputFile = argv[1];
 }
 
 bool WriteToCsvTest(Json::Value& item)
@@ -115,7 +113,7 @@ bool BgCsvOutput::LoadDataDefs()
     return true;
 }
 
-int BgCsvOutput::run()
+int BgCsvOutput::ProcessFlatLog()
 {
 
     // Open BgDataDefs.json and load into a json object

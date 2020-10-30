@@ -32,11 +32,11 @@ using namespace std;
  * @param ioc An io_context object to provide asio I/O
  * @see run()
 */
-BgWebsocketSession::BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testMode)
-    : m_app(pApp), m_debugFlag(testMode), 
+BgWebsocketSession::BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testFlag)
+    : m_app(pApp), m_testFlag(testFlag), 
 	m_resolver(net::make_strand(ioc)), m_ws(net::make_strand(ioc))
 {
-    TESTOUT("Constructed session.")
+    DEBUGOUT("Constructed session.")
 }
 
 /**
@@ -60,7 +60,7 @@ BgWebsocketSession::~BgWebsocketSession()
 */
 void BgWebsocketSession::run(char const* host, char const* port)
 {
-    TESTOUT("Running session.")
+    DEBUGOUT("Running session.")
 
     // Save these for later
     m_host = host;
@@ -93,7 +93,7 @@ void BgWebsocketSession::on_resolve(beast::error_code ec, tcp::resolver::results
     if (ec)
         return fail(ec, "resolve");
 
-    TESTOUT("Session resolved.")
+    DEBUGOUT("Session resolved.")
 
     // Set the timeout for the operation
     beast::get_lowest_layer(m_ws).expires_after(chrono::seconds(5));
@@ -124,7 +124,7 @@ cout << "connect..." << endl;
     if (ec)
         return fail(ec, "connect");
 
-    TESTOUT("Session connected.")
+    DEBUGOUT("Session connected.")
 
     // Turn off the timeout on the tcp_stream, because
     // the websocket stream has its own timeout system.
@@ -166,7 +166,7 @@ void BgWebsocketSession::on_handshake(beast::error_code ec)
     if (ec)
         return fail(ec, "handshake");
 
-    TESTOUT("Session handshake complete.")
+    DEBUGOUT("Session handshake complete.")
 
     // Subscribe to all "interesting" data with continuous refresh
     m_app->RequestAllValues();
@@ -195,7 +195,7 @@ void BgWebsocketSession::on_read(beast::error_code ec, size_t bytes_transferred)
     stringstream testout;
     testout << "Message read:    ";
     //testout << beast::make_printable(m_buffer.data());
-    TESTOUT(testout.str())
+    DEBUGOUT(testout.str())
 
     stringstream ss;
     ss << beast::make_printable(m_buffer.data());
@@ -228,7 +228,7 @@ void BgWebsocketSession::on_write(beast::error_code ec, size_t bytes_transferred
     if (ec)
         return fail(ec, "write");
 
-    TESTOUT("Message written.")
+    DEBUGOUT("Message written.")
 
     // Remove the message from the queue
     m_queue.erase(m_queue.begin());
@@ -237,7 +237,7 @@ void BgWebsocketSession::on_write(beast::error_code ec, size_t bytes_transferred
     if (!m_queue.empty()) {
         stringstream testout;
         testout << "Writing message: " << *m_queue.front();
-        TESTOUT(testout.str())
+        DEBUGOUT(testout.str())
         m_ws.async_write(
             net::buffer(*m_queue.front()),
             beast::bind_front_handler(&BgWebsocketSession::on_write,
@@ -257,7 +257,7 @@ void BgWebsocketSession::on_close(beast::error_code ec)
     if (ec)
         return fail(ec, "close");
 
-    TESTOUT("Session closed.")
+    DEBUGOUT("Session closed.")
 
     // If we get here then the connection is closed gracefully
     m_app->CloseLogFiles();
@@ -294,7 +294,7 @@ void BgWebsocketSession::send(shared_ptr<string const> const& ss)
     // We are not currently writing, so send this immediately
     stringstream testout;
     testout << "Writing message: " << *m_queue.front();
-    TESTOUT(testout.str())
+    DEBUGOUT(testout.str())
     m_ws.async_write(
         net::buffer(*m_queue.front()),
         beast::bind_front_handler(&BgWebsocketSession::on_write,

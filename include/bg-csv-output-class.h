@@ -26,8 +26,8 @@ using namespace std;
 class BgCsvOutput
 {
 public:
-    BgCsvOutput(int argc, char** argv);
-    int run();
+    BgCsvOutput(string& outDir, string& inputFlatLog);
+    int ProcessFlatLog();
     bool LoadDataDefs();
     void ProcessObservation(BgObservation& o);
 
@@ -41,6 +41,7 @@ private:
 
     string m_inputFile;
     string m_outputFile;
+    string m_outDir;
     FILE* m_iFile;
     FILE* m_oFile;
 

@@ -11,8 +11,6 @@
 */
 
 #include "h5000-logger-class.h"
-#include "bg-csv-output-class.h"
-#include "getopt/getopt.h"
 
 /**
  * @brief Main entry point for the program.
@@ -23,7 +21,7 @@
 */
 int main(int argc, char** argv)
 {
-    // Instantiate the application (with command line parameters)
+    // Instantiate and run the application (with command line parameters)
     H5000Logger app(argc, argv);
     return app.run();
 }
