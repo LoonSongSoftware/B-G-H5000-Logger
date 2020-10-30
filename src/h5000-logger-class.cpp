@@ -11,6 +11,7 @@
 */
 
 #include "h5000-logger-class.h"
+#include "getopt/getopt.h"
 #include <fstream>
 
 /**
@@ -23,24 +24,18 @@
 */
 H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL), m_testMode(false), m_fout(NULL)
 {
-	// Check command line arguments.
-	if (argc < 3)
-	{
-		std::cerr <<
-			"\nUsage: h5000-logger <host> <port>\n" <<
-			"Example:\n" <<
-			"    h5000-logger 192.168.0.2 2053\n\n";
-		return;
-	}
+    // Check command line arguments and populate member variables.
+    ProcessCommandLine(argc, argv);
 
-#   ifdef TEST
-    m_testMode = true;
-#   endif
-
-	m_host = argv[1];
-	m_port = argv[2];
-    m_csvFile = new BgCsvOutput(argc, argv);
-    m_csvFile->LoadDataDefs();
+    if (m_csvFlag)
+    {
+        m_csvFile = new BgCsvOutput(argc, argv);
+        m_csvFile->LoadDataDefs();
+    }
+    if (m_flatFlag)
+    {
+        // todo open flatfile
+    }
 }
 
 /**
@@ -54,18 +49,18 @@ H5000Logger::H5000Logger(int argc, char** argv) : m_csvFile(NULL), m_fpLog(NULL)
 */
 int H5000Logger::run()
 {
-	// The io_context is required for all I/O
-	net::io_context ioc;
+    // The io_context is required for all I/O
+    net::io_context ioc;
 
-	// Launch the asynchronous operation
-	// todo interpret command line output options
+    // Launch the asynchronous operation
+    // todo interpret command line output options
     m_session = make_shared<BgWebsocketSession>(this, ioc, m_testMode);
     m_session ->run(m_host.c_str(), m_port.c_str());
 
-	// Run the I/O service. The call will return when the socket is closed.
-	ioc.run();
+    // Run the I/O service. The call will return when the socket is closed.
+    ioc.run();
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 
@@ -293,6 +288,44 @@ void H5000Logger::WriteCsv(BgObservation& o) {
 /// //////////////////////////////////////////////////////////////
 // Helper routines
 /// //////////////////////////////////////////////////////////////
+
+void H5000Logger::ProcessCommandLine(int argc, char** argv)
+{
+
+    char opts[] = "h:p:o:dl:";
+    int opt;
+    while ((opt = getopt(argc, argv, opts)) != -1)
+    {
+        switch (opt)
+        {
+        case 'h':     // specify host ip (required for live logging)
+            m_host = optarg;
+            m_hostFlag = true;
+            break;
+        case 'p':
+            m_port = optarg;
+            m_portFlag = true;
+            break;
+        case 'o':
+            m_outDir = optarg;
+            m_outDirFlag = true;
+            break;
+        case 'd':
+            m_debugFlag = true;
+            break;
+        case 'l':
+            m_inputLogFile = optarg;
+            m_inputLogFlag = true;
+            break;
+        default:
+            std::cerr <<
+              "\nUsage: h5000-logger <host> <port>\n" <<
+              "Example:\n" <<
+              "    h5000-logger 192.168.0.2 2053\n\n";
+            exit(-1);
+        }
+    }
+}
 
 /**
  * @brief Add an array of integers to a string that will become a portion of a DataItem request message.

@@ -81,6 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Program Files\Boost\boost_1_73_0;../../../include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files\Boost\boost_1_73_0\stage\x64\lib;C:\Program Files\Boost\boost_1_73_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\..\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -147,6 +148,7 @@
     <ClInclude Include="..\..\include\bg-csv-output-class.h" />
     <ClInclude Include="..\..\include\bg-observation-class.h" />
     <ClInclude Include="..\..\include\bg-websocket-session-class.h" />
+    <ClInclude Include="..\..\include\getopt\getopt.h" />
     <ClInclude Include="..\..\include\h5000-logger-class.h" />
     <ClInclude Include="..\..\include\json-forwards.h" />
     <ClInclude Include="..\..\include\json.h" />
@@ -154,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\bg-csv-output-class.cpp" />
     <ClCompile Include="..\..\src\bg-websocket-session-class.cpp" />
+    <ClCompile Include="..\..\src\getopt\getopt.cpp" />
     <ClCompile Include="..\..\src\h5000-logger-class.cpp" />
     <ClCompile Include="..\..\src\json\jsoncpp.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />

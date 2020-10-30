@@ -23,7 +23,7 @@
 using namespace std;
 
 // Output progress to console only if in test mode
-#define TESTOUT(x) if (m_testMode) cout << x << endl;
+#define TESTOUT(x) if (m_debugFlag) cout << x << endl;
 #define NOTEST
 
 class H5000Logger {
@@ -51,6 +51,7 @@ private:
     void WriteCsv(BgObservation& o);
 
     // Helper functions
+    void ProcessCommandLine(int argc, char** argv);
     void AddDataItemArray(vector<int> array, string& str);
     void AddIntArray(vector<int> array, string& str);
     void CloseLogFiles();
@@ -58,8 +59,22 @@ private:
 
 
 private:
+    // command line flags
+    bool m_hostFlag;            // host ip specified?
+    bool m_portFlag;            // communication port specified?
+    bool m_outDirFlag;          // output directory specified?
+    bool m_debugFlag;           // debug (console) output?
+    bool m_inputLogFlag;        // process "flatfile" input?
+    bool m_testFlag;            // just test connection?
+    bool m_csvFlag;             // produce CSV file output?
+    bool m_flatFlag;            // produce "flatfile" output?
+
+    // corresponding argument values
     string m_host;
     string m_port;
+    string m_outDir;
+    string m_inputLogFile;
+
     bool m_logFile;											// indicates whather a .log file should be created
     BgCsvOutput* m_csvFile;											// indicates whather a .csv file should be created
     FILE* m_fpLog;											// pointer to the .log output file (if any)

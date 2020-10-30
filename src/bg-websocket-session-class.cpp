@@ -33,7 +33,7 @@ using namespace std;
  * @see run()
 */
 BgWebsocketSession::BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testMode)
-    : m_app(pApp), m_testMode(testMode), 
+    : m_app(pApp), m_debugFlag(testMode), 
 	m_resolver(net::make_strand(ioc)), m_ws(net::make_strand(ioc))
 {
     TESTOUT("Constructed session.")

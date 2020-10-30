@@ -19,6 +19,9 @@
     <ClCompile Include="..\..\src\bg-csv-output-class.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\getopt\getopt.cpp">
+      <Filter>src\getopt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\json.h">
@@ -39,6 +42,9 @@
     <ClInclude Include="..\..\include\bg-csv-output-class.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\getopt\getopt.h">
+      <Filter>include\getopt</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -55,6 +61,12 @@
     </Filter>
     <Filter Include="src\json">
       <UniqueIdentifier>{12b263f6-5331-4537-ae14-77cca64b118b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\getopt">
+      <UniqueIdentifier>{87315f40-8476-454a-af3f-c5689e470fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\getopt">
+      <UniqueIdentifier>{f7adc863-dcc2-4a52-909b-5772681943bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

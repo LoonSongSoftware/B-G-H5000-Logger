@@ -5,5 +5,7 @@ build/gcc/*.o
 *.csv
 *.log
 h5000-logger
-.obj
-
+*.obj
+*.exe
+*.ilk
+*.pdb

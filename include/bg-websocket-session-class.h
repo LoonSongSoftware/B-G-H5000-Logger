@@ -37,8 +37,8 @@ class BgWebsocketSession : public std::enable_shared_from_this<BgWebsocketSessio
 {
     H5000Logger* m_app;                                     // pointer to the application object (contains message handlers)
     std::string m_host;										// hostname (fqdn) or ip address of the websocket server
+    bool m_debugFlag;
     bool m_testMode;
-
     tcp::resolver m_resolver;								// for resolving fqdn to ip address
     websocket::stream<beast::tcp_stream> m_ws;				// the websocket communication object
     beast::flat_buffer m_buffer;								// a buffer to hold websocket i/o
