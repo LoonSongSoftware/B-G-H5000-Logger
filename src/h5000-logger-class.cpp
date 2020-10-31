@@ -13,6 +13,7 @@
 #include "h5000-logger-class.h"
 #include "getopt/getopt.h"
 #include <fstream>
+#include <iomanip>
 
 /// ///////////////////////////////////////////////////////////////////////////
 // Public Member Functions
@@ -29,7 +30,7 @@
  * @param argv Arguments supplied on the command line.
 */
 H5000Logger::H5000Logger(int argc, char** argv) : 
-    m_csvFile(NULL), m_flatFile(NULL), m_fpLog(NULL), m_testFlag(false), m_fout(NULL)
+    m_csvWriter(NULL), m_flatWriter(NULL), m_iFile(NULL)
 {
     // Check command line arguments and populate member variables.
     ProcessCommandLine(argc, argv);
@@ -47,20 +48,20 @@ H5000Logger::H5000Logger(int argc, char** argv) :
 int H5000Logger::run()
 {
 
+    // Open BgDataDefs.json and load into a json object
+    LoadDataDefs();
+
+
     // Create and initialize the CSV output class (if desired)
     if (m_csvFlag)
     {
-        m_csvFile = new BgCsvOutput(m_outDir, m_inputLogFile);
-        m_csvFile->LoadDataDefs();
+        m_csvWriter = new BgCsvWriter(m_outDir);
 
         // Special handling if the input should come from a flat log file,
         // instead of live websocket data
         if (m_inputLogFlag)
         {
-            int nRet = m_csvFile->ProcessFlatLog();
-
-            // Exit after processing the flat log file
-            delete m_csvFile;
+            int nRet = ProcessFlatLog();
             exit(nRet);
         }
     }
@@ -68,7 +69,7 @@ int H5000Logger::run()
     // Create and initialize the FLAT output class (if desired)
     if (m_flatFlag)
     {
-        m_flatFile = new BgFlatOutput(m_outDir);
+        m_flatWriter = new BgFlatWriter(m_outDir);
     }
 
     // The io_context is required for all I/O
@@ -253,12 +254,6 @@ void H5000Logger::handleData(Json::Value& root_)
         if (o.isValid())
         {
             ProcessObservation(o);
-/*            if (m_flatFile != NULL) {
-                m_flatFile->ProcessObservation(o);
-            }
-            if (m_csvFile != NULL) {
-                m_csvFile->ProcessObservation(o);
-            }*/
         }
     }
 }
@@ -266,6 +261,324 @@ void H5000Logger::handleData(Json::Value& root_)
 void H5000Logger::ProcessObservation(BgObservation& o)
 {
 
+    unsigned int csvColT, csvColD, csvColO;
+
+    // Select the handling code corresponding to the data id
+    switch (o.getId()) {
+
+    case 34:		// UTC (date)
+    {
+        try {
+            csvColD = m_bgToCsvMap.at(o.getId()) - 1;
+            csvColT = m_bgToCsvMap.at(35) - 1;
+        }
+        catch (out_of_range& e) {
+            cerr << "Out of range exception: " << e.what() << endl;
+            break;
+        }
+
+        // Convert the date from Julian Date to an Excel-compatible date (days since Jan 0, 1900)
+        m_observations[csvColD] = o.getVal() - 2415019;
+        m_obsSeen[csvColD] = true;
+        unsigned long int utcdate = static_cast<int>(m_observations[csvColD]);
+
+        // Test to see if this is the first "datestamp" observed
+        if (m_rawTimestamp == 0)
+        {
+            // Test to see if a timestamp has been observed yet
+//            if (((int)m_observations[csvColT]) != 0)
+            if (m_obsSeen[csvColT])
+            {
+                // OK. We've just observed the first datestamp and have 
+                // received a timestamp, so start a new output file for the 
+                // new date
+                NewDate(utcdate);
+            }
+        }
+        else {
+            // Test to see if the UTC Date has rolled over to the next day
+            // todo Build the test to see if the UTC date has changed
+            if (false) {
+                NewDate(utcdate);
+            }
+        }
+
+        break;
+    }
+
+    case 35:		// UTC (time)
+    {
+        try {
+            csvColT = m_bgToCsvMap.at(o.getId()) - 1;
+            csvColD = m_bgToCsvMap.at(34) - 1;
+        }
+        catch (out_of_range& e) {
+            cerr << "Out of range exception: " << e.what() << endl;
+            break;
+        }
+        m_observations[csvColT] = o.getVal();
+        m_obsSeen[csvColT] = true;
+        unsigned long int utctime = static_cast<int>(m_observations[csvColT]);
+
+        // Test to see if this is the first "timestamp" observed
+        if (m_rawTimestamp == 0)
+        {
+            // Test to see if a 'datestamp' has been observed yet
+            unsigned long int utcdate = static_cast<int>(m_observations[csvColD]);
+            if (m_obsSeen[csvColD])
+            {
+                // OK. We've just observed the first timestamp and have 
+                // previously seen a 'datestamp,' so start a new output file 
+                // for the new date
+                NewDate(utcdate);
+
+                // Set the rawTimestamp
+                m_rawTimestamp = static_cast<uint64_t>(o.getVal());
+            }
+        }
+        else
+        {
+            // Test to see if this time is within 2 seconds of the current stamp
+            if (o.getVal() - m_rawTimestamp > 1.5)
+            {
+                NewTime(utctime);
+            }
+        }
+
+        // Set the time currently being tracked
+        //m_time = o.strVal();
+        break;
+    }
+
+    default:
+        try {
+            csvColO = m_bgToCsvMap.at(o.getId()) - 1;
+        }
+        catch (out_of_range& e) {
+            (void)e;        // silence compiler warnings about unused variables
+            break;
+        }
+        m_observations[csvColO] = o.getVal();
+        m_obsSeen[csvColO] = true;
+        break;
+    }
+}
+
+
+/**
+ * @brief Test to see if this Json::Value is supposed to be written to the CSV file.
+ * 
+ * Not all items available on the H5000 CPU are logged to the CSV file. Only
+ * those that have a "CsvTrack" or "CsvRequired" member set to 'true' are
+ * logged and written.
+ * 
+ * @param item A JSON element from the BgDataDefs.json file
+ * 
+ * @return True if this data item should be written; false if not.
+*/
+bool H5000Logger::WriteToCsvTest(Json::Value& item)
+{
+    if (item.isMember("CsvTrack"))
+        if (item["CsvTrack"].asBool() == true)
+            return true;
+    if (item.isMember("CsvRequired"))
+    {
+        if (item["CsvRequired"].asBool() == true)
+            return true;
+    }
+    return false;
+}
+
+
+/**
+ * @brief Construct an array of items to be tracked in the CSV file.
+ *
+ * This function will examine the BgDataDefs.json file, identifying DataItem
+ * elements that have a "CsvTrack" member equal to TRUE. It will populate a
+ * member variables (m_csvTrackedItems) with the names of the items/columns
+ * to be written.
+ * @return True if successful; otherwise, false.
+*/
+bool H5000Logger::AnalyzeDataDefs()
+{
+
+    // DataItems is an array of JSON strings, one for each data item
+    Json::Value items = m_bgDataDefs["DataItems"];
+
+    // Construct a vector of the items to be logged to the CSV file
+    // (a vector of strings with the Expedition name of the variable, in the
+    // position corresponding to the CSV file column)
+    m_csvTrackedItems.resize(MAX_CSV_COLUMNS);
+    m_precisions.resize(MAX_CSV_COLUMNS);
+    size_t cols = 0;
+    for (Json::Value::ArrayIndex i = 0; i != items.size(); i++)
+    {
+        Json::Value item = items[i];
+        if (WriteToCsvTest(item))
+        {
+
+            if (!item.isMember("CsvHeader"))
+            {
+                cerr << "CsvColumn is missing for item ID: " << item["ID"].asUInt() << endl;
+                continue;
+            }
+            if (!item.isMember("CsvColumn"))
+            {
+                cerr << "CsvHeader is missing for item ID: " << item["ID"].asUInt() << endl;
+                continue;
+            }
+
+            // All required items are present
+            // Determine which CSV column this is and extend the total count if necessary
+            size_t col = item["CsvColumn"].asUInt();
+            if (col > cols) cols = col + 1;
+
+            string header = item["CsvHeader"].asString();
+            m_csvTrackedItems[col - 1] = header;
+            m_ExpNameToCsvCol[item["CsvHeader"].asString()] = item["CsvColumn"].asUInt();
+            m_CsvColtoExpName[item["CsvColumn"].asUInt()] = item["CsvHeader"].asString();
+            m_precisions[item["CsvColumn"].asUInt() - 1] = (unsigned char)item["Decimals"].asUInt();
+
+            // Add this item to the B&G ID to CSV column map
+            if (item.isMember("ID"))
+            {
+                m_bgToCsvMap[item["ID"].asUInt()] = item["CsvColumn"].asUInt();
+                m_BgIDToBgName[item["ID"].asUInt()] = item["Name"].asString();
+                m_BgNameToBgID[item["Name"].asString()] = item["ID"].asUInt();
+            }
+
+        }
+    }
+    m_csvTrackedItems.resize(cols);
+    m_precisions.resize(cols);
+    m_observations.resize(cols);
+    m_obsSeen.resize(cols);
+    return true;
+}
+
+/**
+ * @brief Start a new .csv file and re-initialize the collection of observations.
+ *
+ * @param utcdate_ An integer representation of the number of days since Jan 0, 1900.
+*/
+void H5000Logger::NewDate(unsigned long int utcdate)
+{
+    // Write the accumulated information for the most recent timestamp to 
+    // the .csv file, then close it (if the file was open in the first place)
+    if (m_csvFlag)
+    {
+        // Write current observation list to the file
+        m_csvWriter->WriteObservations(m_observations, m_precisions, m_obsSeen);
+        m_csvWriter->NewFile(utcdate, m_csvTrackedItems);
+    }
+
+
+    // Clear the stored observations (and zero the time)
+    Clear();
+    unsigned int csvColT;
+    try {
+        csvColT = m_bgToCsvMap.at(35) - 1;
+    }
+    catch (out_of_range& e) {
+        cerr << "Error in NewDate: " << e.what() << endl;
+        exit(-1);
+    }
+    m_obsSeen[csvColT] = false;
+}
+
+/**
+ * @brief Write the accumulated observations for the old timestamp to the file.
+ *
+ * When a new timestamp is observed, the existing observations are written to
+ * the .csv output file (identified with the old timestamp), the tracked data
+ * values are cleared, and a new collection of observations is started.
+ *
+ * @param utctime_ An integer representation of the number of seconds since midnight UTC.
+*/
+void H5000Logger::NewTime(unsigned long int utctime)
+{
+    unsigned int csvColT, csvColD, csvColCombo, csvBoat;
+    try {
+        csvColT = m_bgToCsvMap.at(35) - 1;
+        csvColD = m_bgToCsvMap.at(34) - 1;
+        csvColCombo = m_ExpNameToCsvCol["Utc"] - 1;
+        csvBoat = m_ExpNameToCsvCol["Boat"] - 1;
+    }
+    catch (out_of_range& e) {
+        cerr << "Error in NewDate: " << e.what() << endl;
+        exit(-1);
+    }
+
+    // Create an Excel-compatible "Utc" field and populate the "Boat" field with 0
+    double UtcDateTime = m_observations[csvColD] + (m_observations[csvColT] / (24.0 * 60.0 * 60.0));
+    cout << "TS:  " << setprecision(10) << UtcDateTime << endl;
+    m_observations[csvColCombo] = UtcDateTime;
+    m_obsSeen[csvColCombo] = true;
+    m_observations[csvBoat] = 0;
+    m_obsSeen[csvBoat] = true;
+
+    m_csvWriter->WriteObservations(m_observations, m_precisions, m_obsSeen);
+
+    // Clear the stored observations (except date and time)
+    Clear();
+    m_observations[csvColT] = utctime;
+
+    // Set raw timestamp value
+    m_rawTimestamp = static_cast<uint64_t>(m_observations[csvColT]);
+}
+
+/**
+ * @brief Clear accumulated observation data from the object.
+ *
+ * This function is called immediately after a timestamp set of values has been
+ * written to the .csv file (so intermittent observations/values are dropped
+ * and not carried forward).
+*/
+void H5000Logger::Clear()
+{
+    // Save the date and time most recently observed
+    unsigned int csvColD, csvColT;
+    try {
+        csvColD = m_bgToCsvMap.at(34) - 1;
+        csvColT = m_bgToCsvMap.at(35) - 1;
+    }
+    catch (out_of_range& e) {
+        cerr << "Error in Clear: " << e.what() << endl;
+        exit(-1);
+    }
+
+    double date = m_observations[csvColD];
+    double time = m_observations[csvColT];
+
+    // Clear the entire vector of data observation values
+    fill(m_observations.begin(), m_observations.end(), 0.0);
+
+    // Restore the date and time values to initialize the new set of observations
+    m_observations[csvColD] = date;
+    m_observations[csvColT] = time;
+}
+
+bool H5000Logger::LoadDataDefs()
+{
+    string filename = m_exePath;
+    filename += "resources/BgDataDefs.json";
+    std::ifstream file(filename);
+    if (file.is_open()) {
+        file >> m_bgDataDefs;
+        file.close();
+    }
+    else {
+        cerr << "Couldn't open or read BgDataDefs.json" << endl;
+        exit(-1);
+    }
+
+    if (!AnalyzeDataDefs())
+    {
+        cerr << "Error analyzing the BgDataDefs.json file" << endl;
+        exit(-1);
+    }
+
+    return true;
 }
 
 /**
@@ -296,6 +609,13 @@ void H5000Logger::handleMany(Json::Value& root_)
 void H5000Logger::ProcessCommandLine(int argc, char** argv)
 {
 
+    m_exePath = argv[0];
+#ifdef WIN32
+    m_exePath = m_exePath.substr(0, m_exePath.find_last_of('\\')+1);
+#else
+    m_exePath = m_exePath.substr(0, m_exePath.find_last_of('/') + 1);
+#endif // WIN32
+
     char opts[] = "h:p:o:dl:tcf";
     int opt;
     while ((opt = getopt(argc, argv, opts)) != -1)
@@ -320,6 +640,7 @@ void H5000Logger::ProcessCommandLine(int argc, char** argv)
         case 'l':
             m_inputLogFile = optarg;
             m_inputLogFlag = true;
+            m_csvFlag = true;
             break;
         case 't':
             m_testFlag = true;
@@ -331,14 +652,43 @@ void H5000Logger::ProcessCommandLine(int argc, char** argv)
             m_flatFlag = true;
             break;
         default:
-            std::cerr <<
-              "\nUsage: h5000-logger <host> <port>\n" <<
-              "Example:\n" <<
-              "    h5000-logger 192.168.0.2 2053\n\n";
+            Usage();
             exit(-1);
         }
     }
+
+    // Test parameter combinations
+    if (!m_hostFlag && !m_inputLogFlag)
+    {
+        cerr << "\nNo HOST_IP or INPUT_LOG specified. This application must be run\n" <<
+            "in either \"Live\" or \"Offline\" mode.\n";
+        Usage();
+        exit(-1);
+    }
+
+
 }
+
+void H5000Logger::Usage()
+{
+    std::cerr << "\n" << 
+        "Usage: h5000-logger [[-h HOST_IP] [-p HOST_PORT] [-c] [-f] [-t] | [-l INPUT_LOG]]\n" <<
+        "                    [-o OUTPUT_DIR] [-d]\n" <<
+        "\nWhere:\n" <<
+        "  Live mode:\n" <<
+        "    -h       The IP address of the websocket server to contact.\n" <<
+        "    -p       The port to use on the websocket server.\n" <<
+        "    -c       Write output to a CSV file, grouped by timestamp.\n" <<
+        "    -f       Write output to a \"flat\" file, one line per data observation.\n" <<
+        "    -t       Run in test mode: just send one message to the webserver and report response.\n\n" <<
+        "  Offline mode:\n" <<
+        "    -l       A \"flat\" log file to be consolidated by timestamp and written to a CSV file.\n\n" <<
+        "  Other options\n" <<
+        "    -o       The directory in which to write output files.\n" <<
+        "    -d       Write debugging messages to console output.\n" <<
+        "\n\n";
+}
+
 
 /**
  * @brief Add an array of integers to a string that will become a portion of a DataItem request message.
@@ -395,12 +745,14 @@ void H5000Logger::AddIntArray(vector<int> array, string& str) {
 /**
  * @brief Close the output log files (if they're open).
 */
+/*
 void H5000Logger::CloseLogFiles() {
     if (m_fpLog != NULL)
     {
         fclose(m_fpLog);
     }
 }
+*/
 
 /**
  * @brief Create a JSON value from a JSON-formatted string.
@@ -425,3 +777,46 @@ Json::Value H5000Logger::ConstructJson(string sJson)
 }
 
 #endif
+int H5000Logger::ProcessFlatLog()
+{
+
+    // Open flat log file 
+    if (m_iFile == NULL)
+    {
+        m_iFile = fopen(m_inputLogFile.c_str(), "r");
+        if (m_iFile == NULL)
+        {
+            cerr << "Failed to open file: " << m_inputLogFile << endl;
+            exit(-1);
+        }
+    }
+
+    // Read each line in the file, passing it to BgH5000CsvMaker::ProcessObservation
+    char buffer[200];
+    while (true) {
+
+        // Get the next flat log line from the input file
+        if (fgets(buffer, sizeof(buffer), m_iFile) == NULL) {
+            if (feof(m_iFile)) {
+                cout << "Complete" << endl;
+            }
+            else {
+                cerr << "Error reading file" << endl;
+            }
+            break;
+        }
+        else {
+
+            string s = buffer;
+            BgObservation o(s);
+            ProcessObservation(o);
+        }
+    }
+
+
+    // Close input file and exit
+    if (m_iFile)
+        fclose(m_iFile);
+    return 0;
+}
+

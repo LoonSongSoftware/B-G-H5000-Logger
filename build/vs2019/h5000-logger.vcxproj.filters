@@ -16,13 +16,13 @@
     <ClCompile Include="..\..\src\json\jsoncpp.cpp">
       <Filter>src\json</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\bg-csv-output-class.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\getopt\getopt.cpp">
       <Filter>src\getopt</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\bg-flat-output-class.cpp">
+    <ClCompile Include="..\..\src\bg-csv-writer-class.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\bg-flat-writer-class.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,13 +42,13 @@
     <ClInclude Include="..\..\include\bg-observation-class.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\bg-csv-output-class.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\getopt\getopt.h">
       <Filter>include\getopt</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\bg-flat-output-class.h">
+    <ClInclude Include="..\..\include\bg-csv-writer-class.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bg-flat-writer-class.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

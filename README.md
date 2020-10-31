@@ -9,9 +9,9 @@ An application to log an H5000 CPU websocket data stream to two files:
 This application has been designed to run a Raspberry Pi, but it can be
 compiled and run on other machines as well.
 
-**_This application was written for a single use case, but it is hoped that
+**This application was written for a single use case, but it is hoped that
 it will be useful to others. Comments on the documentation, functionality and,
-in particular, specific pull requests are encouraged. _**
+in particular, specific pull requests are encouraged.**
 
 ## Introduction
 
@@ -20,6 +20,26 @@ allow constant logging of vessel data on a lightweight computer as a historical
 log, for performance evaluation purposes, and for instrument calibration. (The
 latter two of these functions are provided by separate applications that interpret
 the log files created by this program.) For more detail, see "USE-CASE.md."
+
+## Running the Application
+
+### Examples
+
+Display 'usage' information, with available options:
+
+      h5000-logger
+
+Test connectivity to the websocket.org echo server:
+
+      h5000-logger -h echo.websocket.org -p 80 -t
+
+Establish a live connection to a B&G H5000 CPU, with both CSV and "flatfile" output:
+
+      h5000-logger -h 192.168.77.234 -p 2053 -c -f -o d:\ 
+
+Convert an existing "flatfile" into the corresponding CSV file format:
+
+      h5000-logger -l d:\flatfile.log -o d:\
 
 ## External Requirements
 

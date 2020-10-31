@@ -145,8 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\bg-csv-output-class.h" />
-    <ClInclude Include="..\..\include\bg-flat-output-class.h" />
+    <ClInclude Include="..\..\include\bg-csv-writer-class.h" />
+    <ClInclude Include="..\..\include\bg-flat-writer-class.h" />
     <ClInclude Include="..\..\include\bg-observation-class.h" />
     <ClInclude Include="..\..\include\bg-websocket-session-class.h" />
     <ClInclude Include="..\..\include\getopt\getopt.h" />
@@ -155,8 +155,8 @@
     <ClInclude Include="..\..\include\json.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\bg-csv-output-class.cpp" />
-    <ClCompile Include="..\..\src\bg-flat-output-class.cpp" />
+    <ClCompile Include="..\..\src\bg-csv-writer-class.cpp" />
+    <ClCompile Include="..\..\src\bg-flat-writer-class.cpp" />
     <ClCompile Include="..\..\src\bg-websocket-session-class.cpp" />
     <ClCompile Include="..\..\src\getopt\getopt.cpp" />
     <ClCompile Include="..\..\src\h5000-logger-class.cpp" />

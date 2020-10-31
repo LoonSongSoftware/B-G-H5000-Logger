@@ -99,7 +99,6 @@ void BgWebsocketSession::on_resolve(beast::error_code ec, tcp::resolver::results
     beast::get_lowest_layer(m_ws).expires_after(chrono::seconds(5));
 
     // Make the connection on the IP address we get from a lookup
-cout << "connecting..." << endl;
     beast::get_lowest_layer(m_ws).async_connect(
         results,
         beast::bind_front_handler(
@@ -120,7 +119,6 @@ cout << "connecting..." << endl;
 */
 void BgWebsocketSession::on_connect(beast::error_code ec, tcp::resolver::results_type::endpoint_type ep)
 {
-cout << "connect..." << endl;
     if (ec)
         return fail(ec, "connect");
 
@@ -194,11 +192,11 @@ void BgWebsocketSession::on_read(beast::error_code ec, size_t bytes_transferred)
 
     stringstream testout;
     testout << "Message read:    ";
-    //testout << beast::make_printable(m_buffer.data());
     DEBUGOUT(testout.str())
 
     stringstream ss;
     ss << beast::make_printable(m_buffer.data());
+    DEBUGOUT(ss.str());
     m_app->handleResponse(ss.str());
 
     // Clear the buffer
@@ -236,7 +234,7 @@ void BgWebsocketSession::on_write(beast::error_code ec, size_t bytes_transferred
     // Send the next message (if any)
     if (!m_queue.empty()) {
         stringstream testout;
-        testout << "Writing message: " << *m_queue.front();
+        testout << "Writing message:\n" << *m_queue.front();
         DEBUGOUT(testout.str())
         m_ws.async_write(
             net::buffer(*m_queue.front()),
@@ -260,7 +258,7 @@ void BgWebsocketSession::on_close(beast::error_code ec)
     DEBUGOUT("Session closed.")
 
     // If we get here then the connection is closed gracefully
-    m_app->CloseLogFiles();
+    //m_app->CloseLogFiles();
 }
 
 /**
@@ -293,7 +291,7 @@ void BgWebsocketSession::send(shared_ptr<string const> const& ss)
 
     // We are not currently writing, so send this immediately
     stringstream testout;
-    testout << "Writing message: " << *m_queue.front();
+    testout << "Writing message:\n" << *m_queue.front();
     DEBUGOUT(testout.str())
     m_ws.async_write(
         net::buffer(*m_queue.front()),

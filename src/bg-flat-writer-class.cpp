@@ -1,12 +1,12 @@
 
 
 
-#include "bg-flat-output-class.h"
+#include "bg-flat-writer-class.h"
 #include "bg-observation-class.h"
 #include <ctime>
 
 
-BgFlatOutput::BgFlatOutput(string& outDir):
+BgFlatWriter::BgFlatWriter(string& outDir):
     m_outDir(outDir)
 {
 }
@@ -16,7 +16,7 @@ BgFlatOutput::BgFlatOutput(string& outDir):
  *
  * @param o A BgObservation object with the new data.
 */
-void BgFlatOutput::ProcessObservation(BgObservation& o) 
+void BgFlatWriter::ProcessObservation(BgObservation& o) 
 {
     // If the flat log has not been opened, open it.
     if (m_oFile == NULL)
@@ -40,7 +40,7 @@ void BgFlatOutput::ProcessObservation(BgObservation& o)
  *
  * @param utcdate_ An integer representation of the number of days since Jan 0, 1900.
 */
-void BgFlatOutput::NewDate(unsigned long int utcdate)
+void BgFlatWriter::NewDate(unsigned long int utcdate)
 {
     if (m_oFile != NULL) {
         fclose(m_oFile);
@@ -57,7 +57,7 @@ void BgFlatOutput::NewDate(unsigned long int utcdate)
  * @param utcdate_ An integer representing the number of days since Jan 0, 1900.
  * @return A string with the new file name.
 */
-string BgFlatOutput::MakeFileName(unsigned long int utcdate)
+string BgFlatWriter::MakeFileName(unsigned long int utcdate)
 {
     // Convert the Excel-format date to a tm struct (in UTC time)
     double dateExcel = utcdate;

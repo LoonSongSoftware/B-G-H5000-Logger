@@ -15,8 +15,8 @@
 
 #include "bg-observation-class.h"
 #include "bg-websocket-session-class.h"
-#include "bg-csv-output-class.h"
-#include "bg-flat-output-class.h"
+#include "bg-csv-writer-class.h"
+#include "bg-flat-writer-class.h"
 #include "json/json.h"
 #include <string>
 #include <vector>
@@ -44,18 +44,18 @@ private:
     void handleData(Json::Value& root);
     void handleResponse(Json::Value& root);
     void handleResponse(string const& s);
+    bool AnalyzeDataDefs();
+    bool LoadDataDefs();
     void handleMany(Json::Value& root);
-
-    // Log output functions
-    void WriteFlatLog(BgObservation& o);
-    void WriteCsv(BgObservation& o);
 
     // Helper functions
     void ProcessCommandLine(int argc, char** argv);
     void AddDataItemArray(vector<int> array, string& str);
     void AddIntArray(vector<int> array, string& str);
-    void CloseLogFiles();
     Json::Value ConstructJson(string sJson);
+    void Usage();
+
+    int ProcessFlatLog();
 
 
 private:
@@ -74,60 +74,40 @@ private:
     string m_port;
     string m_outDir;
     string m_inputLogFile;
+    string m_exePath;
 
-    BgCsvOutput* m_csvFile;
-    BgFlatOutput* m_flatFile;
-    FILE* m_fpLog;											// pointer to the .log output file (if any)
+    BgCsvWriter* m_csvWriter;
+    BgFlatWriter* m_flatWriter;
 
     // Core actions
     void ProcessObservation(BgObservation& o);
-    void ProcessObservation(const char* buffer);
+    bool WriteToCsvTest(Json::Value& item);
 
     // Helper functions
     void NewDate(unsigned long int utcdate);
     void Clear();
     void NewTime(unsigned long int utctime);
-    string MakeFileName(unsigned long int utcdate);
-    Json::Value ReadJsonFile(const char* fname);
 
 public:
-    uint64_t m_rawTimestamp = 0;
-    tm m_tmTimestamp = { 0,0,0,0 };
-    string m_date;
-    string m_time;
-    array<double, 100> m_observations;
-    FILE* m_fout;
     shared_ptr<BgWebsocketSession> m_session;
 
-    enum class trackedData {
-        // Date/time
-        UtcDate, UtcTime,
 
-        // Course
-        Cog, Hdg,
 
-        // Boat Speed
-        Sog, Bsp, MBsp, MBspPrt, MBspStbd, SpdThruWater, BspCorr,
 
-        // Wind Speed
-        Mws, Aws, Tws, OrigTws, CorrMws, TwsCorr,
 
-        // Wind Angle
-        Mwa, CorrMwa, Awa, Twa, OrigTwa, TwaCorr, MastWa,
+    map<int, int> m_bgToCsvMap;     // Map for translating B&G DataItem IDs to Expedition CSV columns
+    vector<double> m_observations;  // Vector of observations for this timestamp (overwritten for each new time)
+    map<string, int> m_ExpNameToCsvCol; // Map to translate an Expedition column name to the corresponding column number
+    map<int, string> m_CsvColtoExpName; // Map to translate a column number to the corresponding Expedition column name
+    map<int, string> m_BgIDToBgName;    // Map to translate an ID value to the corresponding B&G DataItem name
+    vector<bool> m_obsSeen;         // Elements are set to True when the corresponding observation has been seen
+    uint64_t m_rawTimestamp = 0;
+    Json::Value m_bgDataDefs;
+    vector<string> m_csvTrackedItems;
+    vector<unsigned char> m_precisions; // Vector with precision (after decimal point) for each data item
+    map<string, int> m_BgNameToBgID;    // Map to translate a B&G DataItem name to its corrsponding ID value
 
-        // Wind Direction
-        Twd, OrigTwd,
-
-        // Tidal/current flow
-        TideSet, TideRate,
-
-        // Performance
-        TargetTwa, TargetSpd, PolarBsp, PolarPerf, Vmg,
-
-        // END
-        MAX_ITEMS
-    };
-
+    FILE* m_iFile;
 };
 
 #endif	// __H5000_LOGGER_CLASS_H
