@@ -7,7 +7,7 @@
 
 
 BgFlatWriter::BgFlatWriter(string& outDir):
-    m_outDir(outDir)
+    m_outDir(outDir), m_oFile(NULL)
 {
 }
 

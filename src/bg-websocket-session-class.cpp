@@ -32,8 +32,8 @@ using namespace std;
  * @param ioc An io_context object to provide asio I/O
  * @see run()
 */
-BgWebsocketSession::BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testFlag)
-    : m_app(pApp), m_testFlag(testFlag), 
+BgWebsocketSession::BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool debugFlag, bool testFlag)
+    : m_app(pApp), m_debugFlag(debugFlag), m_testFlag(testFlag),
 	m_resolver(net::make_strand(ioc)), m_ws(net::make_strand(ioc))
 {
     DEBUGOUT("Constructed session.")

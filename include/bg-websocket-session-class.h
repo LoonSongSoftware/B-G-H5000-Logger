@@ -45,7 +45,7 @@ class BgWebsocketSession : public std::enable_shared_from_this<BgWebsocketSessio
     std::vector<std::shared_ptr<std::string const>> m_queue;	// a queue of messages to be sent to the h5000 websocket
 
 public:
-    explicit BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool testFlag);
+    explicit BgWebsocketSession(H5000Logger* pApp, net::io_context& ioc, bool debugFlag, bool testFlag);
     ~BgWebsocketSession();
     void run(char const* host, char const* port);
     void send(shared_ptr<string const> const& ss);

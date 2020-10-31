@@ -27,7 +27,7 @@
  * @param data A Json::Value object with the observation data (in B&G websocket format).
 */
 BgObservation::BgObservation(Json::Value data) :
-    m_val(0), m_sysVal(0), m_inst(0), m_damped(false), m_dampedVal(0)
+    m_id(0), m_val(0), m_sysVal(0), m_inst(0), m_valid(false), m_damped(false), m_dampedVal(0)
 {
     // 'id' and 'valid' are always present
     m_id = data["id"].asInt();
@@ -59,24 +59,32 @@ BgObservation::BgObservation(Json::Value data) :
  * @param data A string with the observation data (in flatlog format).
 */
 BgObservation::BgObservation(string data) :
-    m_val(0), m_sysVal(0), m_inst(0), m_damped(false), m_dampedVal(0)
+    m_id(0), m_val(0), m_sysVal(0), m_inst(0), m_valid(false), m_damped(false), m_dampedVal(0)
 {
 
-    size_t idx;
-    size_t start = 0;
-    m_id = stoul(data,&idx);
-    start += idx + 1;
-    m_valid = (stoul(data.substr(start), &idx) == 1);
-    start += idx + 1;
-    m_val = stod(data.substr(start), &idx);
-    start += idx + 1;
-    m_sysVal = stod(data.substr(start), &idx);
-    start += idx + 1;
-    m_dampedVal = stod(data.substr(start), &idx);
-    start += idx + 1;
-    m_inst = stoul(data.substr(start), &idx);
-    start += idx + 1;
-    m_damped = (stoul(data.substr(start), &idx) == 1);
+	// This try block is intended to capture garbled flatfile lines (such as
+	// when the logging program is not terminated gracefully).
+	try {
+		size_t idx;
+		size_t start = 0;
+		m_id = stoul(data,&idx);
+		start += idx + 1;
+		m_valid = (stoul(data.substr(start), &idx) == 1);
+		start += idx + 1;
+		m_val = stod(data.substr(start), &idx);
+		start += idx + 1;
+		m_sysVal = stod(data.substr(start), &idx);
+		start += idx + 1;
+		m_dampedVal = stod(data.substr(start), &idx);
+		start += idx + 1;
+		m_inst = stoul(data.substr(start), &idx);
+		start += idx + 1;
+		m_damped = (stoul(data.substr(start), &idx) == 1);
+	} catch (exception& e)
+	{
+		m_valid = false;
+		m_id = -1;
+	}
 }
 
 /**

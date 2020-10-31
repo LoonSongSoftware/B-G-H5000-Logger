@@ -30,7 +30,10 @@
  * @param argv Arguments supplied on the command line.
 */
 H5000Logger::H5000Logger(int argc, char** argv) : 
-    m_csvWriter(NULL), m_flatWriter(NULL), m_iFile(NULL)
+    m_hostFlag(false), m_portFlag(false), m_outDirFlag(false), m_debugFlag(false),
+	m_inputLogFlag(false), m_testFlag(false), m_csvFlag(false), m_flatFlag(false),
+	m_csvWriter(NULL), m_flatWriter(NULL), m_session(NULL), m_rawTimestamp(0),
+	m_iFile(NULL)
 {
     // Check command line arguments and populate member variables.
     ProcessCommandLine(argc, argv);
@@ -74,7 +77,7 @@ int H5000Logger::run()
 
     // The io_context is required for all I/O
     net::io_context ioc;
-    m_session = make_shared<BgWebsocketSession>(this, ioc, m_testFlag);
+    m_session = make_shared<BgWebsocketSession>(this, ioc, m_debugFlag, m_testFlag);
     m_session ->run(m_host.c_str(), m_port.c_str());
 
     // Run the I/O service. The call will return when the socket is closed.

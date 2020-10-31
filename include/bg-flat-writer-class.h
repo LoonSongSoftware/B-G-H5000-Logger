@@ -31,8 +31,8 @@ private:
     void NewDate(unsigned long int utcdate);
     string MakeFileName(unsigned long int utcdate);
 
-    FILE* m_oFile;
     string m_outDir;
+    FILE* m_oFile;
 
 };
 

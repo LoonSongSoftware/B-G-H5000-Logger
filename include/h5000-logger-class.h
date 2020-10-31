@@ -101,7 +101,7 @@ public:
     map<int, string> m_CsvColtoExpName; // Map to translate a column number to the corresponding Expedition column name
     map<int, string> m_BgIDToBgName;    // Map to translate an ID value to the corresponding B&G DataItem name
     vector<bool> m_obsSeen;         // Elements are set to True when the corresponding observation has been seen
-    uint64_t m_rawTimestamp = 0;
+    uint64_t m_rawTimestamp;
     Json::Value m_bgDataDefs;
     vector<string> m_csvTrackedItems;
     vector<unsigned char> m_precisions; // Vector with precision (after decimal point) for each data item
