@@ -82,6 +82,7 @@ BgObservation::BgObservation(string data) :
 		m_damped = (stoul(data.substr(start), &idx) == 1);
 	} catch (exception& e)
 	{
+        (void)e;
 		m_valid = false;
 		m_id = -1;
 	}
