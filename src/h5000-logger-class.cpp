@@ -266,6 +266,12 @@ void H5000Logger::ProcessObservation(BgObservation& o)
 
     unsigned int csvColT, csvColD, csvColO;
 
+    // Write all observations to the flat file (if desired)
+    if (m_flatFlag) 
+    {
+        m_flatWriter->ProcessObservation(o);
+    }
+
     // Select the handling code corresponding to the data id
     switch (o.getId()) {
 

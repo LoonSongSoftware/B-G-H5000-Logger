@@ -21,7 +21,7 @@ void BgFlatWriter::ProcessObservation(BgObservation& o)
     // If the flat log has not been opened, open it.
     if (m_oFile == NULL)
     {
-        string filename = "flatlog.log";
+        string filename = m_outDir + "flatlog.log";
         m_oFile = fopen(filename.c_str(), "a");
     }
 
