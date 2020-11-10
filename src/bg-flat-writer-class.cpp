@@ -40,14 +40,14 @@ void BgFlatWriter::ProcessObservation(BgObservation& o)
  *
  * @param utcdate_ An integer representation of the number of days since Jan 0, 1900.
 */
-void BgFlatWriter::NewDate(unsigned long int utcdate)
+void BgFlatWriter::NewFile(unsigned long int utcdate)
 {
     if (m_oFile != NULL) {
         fclose(m_oFile);
     }
 
     // Open a new .log output file for observations from this new date
-    m_oFile = fopen(MakeFileName(utcdate).c_str(), "w");
+    m_oFile = fopen(MakeFileName(utcdate).c_str(), "a");
 }
 
 

@@ -26,9 +26,9 @@ class BgFlatWriter
 public:
     BgFlatWriter(string& m_outDir);
     void ProcessObservation(BgObservation& o);
+    void NewFile(unsigned long int utcdate);
 
 private:
-    void NewDate(unsigned long int utcdate);
     string MakeFileName(unsigned long int utcdate);
 
     string m_outDir;

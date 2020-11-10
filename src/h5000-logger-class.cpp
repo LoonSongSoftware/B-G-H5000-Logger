@@ -266,12 +266,6 @@ void H5000Logger::ProcessObservation(BgObservation& o)
 
     unsigned int csvColT, csvColD, csvColO;
 
-    // Write all observations to the flat file (if desired)
-    if (m_flatFlag) 
-    {
-        m_flatWriter->ProcessObservation(o);
-    }
-
     // Select the handling code corresponding to the data id
     switch (o.getId()) {
 
@@ -371,6 +365,13 @@ void H5000Logger::ProcessObservation(BgObservation& o)
         m_obsSeen[csvColO] = true;
         break;
     }
+
+    // Write all observations to the flat file (if desired)
+    if (m_flatFlag)
+    {
+        m_flatWriter->ProcessObservation(o);
+    }
+
 }
 
 
@@ -479,6 +480,11 @@ void H5000Logger::NewDate(unsigned long int utcdate)
         // Write current observation list to the file
         m_csvWriter->WriteObservations(m_observations, m_precisions, m_obsSeen);
         m_csvWriter->NewFile(utcdate, m_csvTrackedItems);
+    }
+
+    if (m_flatFlag)
+    {
+        m_flatWriter->NewFile(utcdate);
     }
 
 

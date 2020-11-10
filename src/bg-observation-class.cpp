@@ -50,7 +50,7 @@ BgObservation::BgObservation(Json::Value data) :
 
 /**
  * @brief Constructor (creates an Observation object from a string object).
-
+ *
  * When the application is used off the boat (away from a live websocket
  * session), the observation can be constructed from a line in the flatlog
  * file.  This function takes the string associated with a single observation/

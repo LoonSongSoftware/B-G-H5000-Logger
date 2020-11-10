@@ -41,6 +41,7 @@ void BgCsvWriter::WriteObservations(vector<double>& observations, vector<unsigne
     }
 }
 
+
 void BgCsvWriter::NewFile(unsigned long utcdate, vector<string>& trackedItems)
 {
     // Close existing file (if any)
@@ -48,7 +49,7 @@ void BgCsvWriter::NewFile(unsigned long utcdate, vector<string>& trackedItems)
         fclose(m_oFile);
 
     // Open a new .csv output file for observations from this new date
-    m_oFile = fopen(MakeFileName(utcdate).c_str(), "w");
+    m_oFile = fopen(MakeFileName(utcdate).c_str(), "a");
 
     // Write a line of column headings
     string headings = MakeHeaderString(trackedItems) + '\n';
