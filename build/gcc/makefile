@@ -16,7 +16,7 @@ BINDIR	:= $(PROJDIR)
 
 # Compile and link flag definitions
 COMMON_CFLAGS	:= -Wall -Wno-unknown-pragmas -Wno-format -Werror -Wno-error=sequence-point -Wno-sequence-point -Wno-psabi
-DEBUG_CFLAGS    := -Wno-inline -ggdb -DDEBUG -v
+DEBUG_CFLAGS    := -Wno-inline -ggdb -DDEBUG
 RELEASE_CFLAGS  := -O3 -DNDEBUG
 DEBUG_LDFLAGS	:= -g
 GITVERSION	:=$(shell git describe --long --tags --dirty 2>/dev/null | sed s/^v//)

@@ -47,7 +47,8 @@ void BgFlatWriter::NewFile(unsigned long int utcdate)
     }
 
     // Open a new .log output file for observations from this new date
-    m_oFile = fopen(MakeFileName(utcdate).c_str(), "a");
+    string filename = m_outDir + MakeFileName(utcdate);
+    m_oFile = fopen(filename.c_str(), "a");
 }
 
 
@@ -66,7 +67,7 @@ string BgFlatWriter::MakeFileName(unsigned long int utcdate)
 
     // Create the filename buffer, including the date
     char buffer[100];
-    strftime(buffer, 100, "%Y%m%d-h5000-cpu-data.csv", dateTm);
+    strftime(buffer, 100, "%Y%m%d-flatlog.log", dateTm);
 
     return string(buffer);
 }
