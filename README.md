@@ -21,6 +21,19 @@ log, for performance evaluation purposes, and for instrument calibration. (The
 latter two of these functions are provided by separate applications that interpret
 the log files created by this program.) For more detail, see "USE-CASE.md."
 
+## Building the Application - Debian
+### Install prerequisites
+
+```shell
+sudo apt install libboost-dev
+```
+
+### Compile the application
+```shell
+cd B-G-H5000-Logger
+./make4linux
+```
+
 ## Running the Application
 
 ### Examples
