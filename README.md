@@ -24,11 +24,38 @@ the log files created by this program.) For more detail, see "USE-CASE.md."
 ## Building the Application - Debian
 ### Install prerequisites
 
+First, make sure that `gcc` and `make` are installed:
+```shell
+sudo apt install build-essential
+```
+
+Next, you will need to install the [Boost library](https://boost.org), version 1.70 or later. As of this writing 
+(9-Jan-2020), the Debian buster repository is at 1.67.0, so you may have to build the Boost libraries yourself.
+
+#### To build the Boost libraries
+
+See the [Boost Getting Started webpage](https://www.boost.org/more/getting_started/index.html) for definitive 
+directions on how to install Boost. What follows uses Boost V1.75.0 as an example. There may be later versions.
+
+```shell
+cd /tmp
+wget https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.bz2
+tar --bzip2 -xf boost_1_75_0.tar.bz2
+sudo mv boost_1_75_0 /usr/local
+ln -s /usr/local/boost_1_75_0 /usr/local/boost
+export CPLUS_INCLUDE=/usr/local/boost
+```
+
+#### To install using `apt`
+
+Alternatively, if the Debian repositories are up-to-date (check using `apt search libboost-dev`),
+you may be lucky enough to be able to install Boost using a simple `apt` command:
 ```shell
 sudo apt install libboost-dev
 ```
 
 ### Compile the application
+Having installed the pre-requisites, compile the application:
 ```shell
 cd B-G-H5000-Logger
 ./make4linux
