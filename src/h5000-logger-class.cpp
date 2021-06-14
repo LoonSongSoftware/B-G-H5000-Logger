@@ -532,7 +532,9 @@ void H5000Logger::NewTime(unsigned long int utctime)
     m_observations[csvBoat] = 0;
     m_obsSeen[csvBoat] = true;
 
-    m_csvWriter->WriteObservations(m_observations, m_precisions, m_obsSeen);
+    if (m_csvFlag) {
+        m_csvWriter->WriteObservations(m_observations, m_precisions, m_obsSeen);
+    }
 
     // Clear the stored observations (except date and time)
     Clear();

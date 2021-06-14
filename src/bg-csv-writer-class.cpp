@@ -10,6 +10,7 @@
 BgCsvWriter::BgCsvWriter(string& outDir):
     m_outDir(outDir), m_oFile(NULL)
 {
+std::cout<<"BgCsvWriter constructor"<<std::endl;
 }
 
 void BgCsvWriter::WriteObservations(vector<double>& observations, vector<unsigned char>& precisions, vector<bool>& seen)

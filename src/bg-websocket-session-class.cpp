@@ -72,6 +72,7 @@ void BgWebsocketSession::run(char const* host, char const* port)
         beast::bind_front_handler(
             &BgWebsocketSession::on_resolve,
             shared_from_this()));
+    DEBUGOUT("::Run exiting.")
 }
 
 
@@ -104,6 +105,7 @@ void BgWebsocketSession::on_resolve(beast::error_code ec, tcp::resolver::results
         beast::bind_front_handler(
             &BgWebsocketSession::on_connect,
             shared_from_this()));
+    DEBUGOUT("::on_resolve exiting.")
 }
 
 /**
@@ -152,6 +154,7 @@ void BgWebsocketSession::on_connect(beast::error_code ec, tcp::resolver::results
         beast::bind_front_handler(
             &BgWebsocketSession::on_handshake,
             shared_from_this()));
+    DEBUGOUT("::on_connect exiting.")
 }
 
 /**
@@ -175,6 +178,7 @@ void BgWebsocketSession::on_handshake(beast::error_code ec)
         beast::bind_front_handler(
             &BgWebsocketSession::on_read,
             shared_from_this()));
+    DEBUGOUT("::on_handshake exiting.")
 }
 
 /**
@@ -196,7 +200,7 @@ void BgWebsocketSession::on_read(beast::error_code ec, size_t bytes_transferred)
 
     stringstream ss;
     ss << beast::make_printable(m_buffer.data());
-    DEBUGOUT(ss.str());
+    //DEBUGOUT(ss.str());
     m_app->handleResponse(ss.str());
 
     // Clear the buffer
@@ -208,6 +212,7 @@ void BgWebsocketSession::on_read(beast::error_code ec, size_t bytes_transferred)
         beast::bind_front_handler(
             &BgWebsocketSession::on_read,
             shared_from_this()));
+    DEBUGOUT("::on_read exiting.")
 }
 
 /**
@@ -241,6 +246,7 @@ void BgWebsocketSession::on_write(beast::error_code ec, size_t bytes_transferred
             beast::bind_front_handler(&BgWebsocketSession::on_write,
                 shared_from_this()));
     }
+    DEBUGOUT("::on_write exiting.")
 }
 
 /**
@@ -259,6 +265,7 @@ void BgWebsocketSession::on_close(beast::error_code ec)
 
     // If we get here then the connection is closed gracefully
     //m_app->CloseLogFiles();
+    DEBUGOUT("::on_close exiting.")
 }
 
 /**
@@ -270,6 +277,7 @@ void BgWebsocketSession::on_close(beast::error_code ec)
 void BgWebsocketSession::fail(beast::error_code ec, char const* what)
 {
     cerr << what << ": " << ec.message() << "\n";
+    DEBUGOUT("FAIL::")
 }
 
 /**
@@ -297,4 +305,5 @@ void BgWebsocketSession::send(shared_ptr<string const> const& ss)
         net::buffer(*m_queue.front()),
         beast::bind_front_handler(&BgWebsocketSession::on_write,
             shared_from_this()));
+    DEBUGOUT("::send exiting.")
 }
